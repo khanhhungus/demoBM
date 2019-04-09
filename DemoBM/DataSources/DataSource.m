@@ -23,6 +23,9 @@
         NSMutableArray<News *> *arrayNews = NSMutableArray.new;
         for( NSDictionary *newsDict in articlesJSON) {
             NSString *title = newsDict[@"title"];
+            if (title == nil) {
+                continue;
+            }
             NSString *publisher = newsDict[@"publisherName"];
             NSString *totalComments = newsDict[@"totalComments"];
             NSString *avatarURL = newsDict[@"avatarUrl"];

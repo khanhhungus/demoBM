@@ -20,10 +20,16 @@
 - (void)fillData:(News*) news {
     FormatTime *formatTime = [[FormatTime alloc] init];
     double date = [news.date doubleValue];
-    NSDate *timeStamp = [NSDate dateWithTimeIntervalSince1970: (NSTimeInterval) date];
-    NSString *timeAgo = [formatTime agoStringFromTime: timeStamp];
+    
+    if (news.date != nil) {
+        NSDate *timeStamp = [NSDate dateWithTimeIntervalSince1970: (NSTimeInterval) date];
+        NSString *timeAgo = [formatTime agoStringFromTime: timeStamp];
+        self.source.text = [NSString stringWithFormat: @"%@ • %@ • %@ bình luận",news.publisher,timeAgo,news.totalComments];
+    } else {
+        self.source.text = [NSString stringWithFormat: @"%@ • %@ bình luận",news.publisher,news.totalComments];
+    }
+    
     self.title.text = news.title;
-    self.source.text = [NSString stringWithFormat: @"%@ • %@ giờ • %@ bình luận",news.publisher, timeAgo,news.totalComments];
     dispatch_async(dispatch_get_global_queue(0,0), ^{
         
         NSData * data = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: news.avatarURL]];
