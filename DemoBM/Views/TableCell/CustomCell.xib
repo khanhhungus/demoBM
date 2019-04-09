@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CustomCell" rowHeight="140" id="KGk-i7-Jjw" customClass="CustomCell">
+            <rect key="frame" x="0.0" y="0.0" width="349" height="140"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="349" height="139.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8xL-sP-dYr">
+                        <rect key="frame" x="15" y="15" width="85" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="85" id="Uv9-cN-ftd"/>
+                            <constraint firstAttribute="height" constant="60" id="asR-Pw-MpU"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LPV-CM-cvz">
+                        <rect key="frame" x="115" y="15" width="219" height="19.5"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LbI-SW-2t8">
+                        <rect key="frame" x="115" y="58.5" width="219" height="16.5"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="LbI-SW-2t8" secondAttribute="trailing" constant="15" id="2Ah-zb-ZPZ"/>
+                    <constraint firstAttribute="bottom" secondItem="8xL-sP-dYr" secondAttribute="bottom" constant="15" id="2uw-qN-87h"/>
+                    <constraint firstItem="LPV-CM-cvz" firstAttribute="top" secondItem="8xL-sP-dYr" secondAttribute="top" id="3cP-id-swa"/>
+                    <constraint firstAttribute="trailing" secondItem="LPV-CM-cvz" secondAttribute="trailing" constant="15" id="Dqx-1r-OPT"/>
+                    <constraint firstItem="8xL-sP-dYr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Ijj-l1-VXu"/>
+                    <constraint firstItem="LbI-SW-2t8" firstAttribute="bottom" secondItem="8xL-sP-dYr" secondAttribute="bottom" id="N4f-ef-Ycu"/>
+                    <constraint firstItem="LbI-SW-2t8" firstAttribute="top" relation="greaterThanOrEqual" secondItem="LPV-CM-cvz" secondAttribute="bottom" priority="750" constant="10" id="P8R-YY-WyK"/>
+                    <constraint firstItem="8xL-sP-dYr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="THL-hG-lUV"/>
+                    <constraint firstItem="LPV-CM-cvz" firstAttribute="leading" secondItem="8xL-sP-dYr" secondAttribute="trailing" constant="15" id="kPr-oD-66B"/>
+                    <constraint firstItem="LbI-SW-2t8" firstAttribute="leading" secondItem="8xL-sP-dYr" secondAttribute="trailing" constant="15" id="z7J-2F-Qg7"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="source" destination="LbI-SW-2t8" id="oDg-R4-V2a"/>
+                <outlet property="thumbnail" destination="8xL-sP-dYr" id="a8N-Vu-2T0"/>
+                <outlet property="title" destination="LPV-CM-cvz" id="IUy-ks-iXx"/>
+            </connections>
+            <point key="canvasLocation" x="152.89855072463769" y="170.75892857142856"/>
+        </tableViewCell>
+    </objects>
+</document>

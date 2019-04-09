@@ -1,0 +1,17 @@
+//
+//  ViewController.h
+//  DemoBM
+//
+//  Created by Khanh Hung Nguyen on 4/8/19.
+//  Copyright © 2019 Khanh Hung Nguyen. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import "CustomCell.h"
+#import "News.h"
+
+@interface TableViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+
+@property(strong, nonatomic)NSMutableArray *arrayNews;
+@end
+
