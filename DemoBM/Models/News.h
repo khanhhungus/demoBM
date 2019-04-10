@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface News : NSObject
@@ -17,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *avatarURL;
 @property (strong, nonatomic) NSString *totalComments;
 @property (strong, nonatomic) NSNumber *date;
+@property (strong, nonatomic) NSMutableArray *images;
 
 @end
 

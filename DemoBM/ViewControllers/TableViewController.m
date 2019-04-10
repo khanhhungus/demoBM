@@ -9,12 +9,15 @@
 #import "TableViewController.h"
 #import "News.h"
 #import "DataSource.h"
+#import "TableMultiImageCell.h"
+
 @interface TableViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
 @implementation TableViewController
+
 @synthesize arrayNews;
 
 - (void)viewDidLoad {
@@ -28,6 +31,7 @@
         });
     }];
     
+    [[self tableView] registerClass:[TableMultiImageCell class] forCellReuseIdentifier: @"TableMultiImageCell"];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -39,20 +43,64 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellID = @"CustomCell";
+
+    News *news = arrayNews[indexPath.row];
+    return [self getTableViewCell:news :tableView :indexPath];
+}
+
+-(UITableViewCell *) getTableViewCell: (News *) news :(UITableView *) tableView :(NSIndexPath *) indexPath {
+    if ( news.images.count > 2 ) {
+        return [self getMultiImageCell:news :tableView :indexPath];
+    } else {
+        return [self getNormalCell:news :tableView :indexPath];
+    }
+}
+
+
+-(UITableViewCell *) getMultiImageCell: (News *) news :(UITableView *) tableView :(NSIndexPath *) indexPath {
+    static NSString *cellIdentifier = @"TableMultiImageCell";
+    
+    TableMultiImageCell *cell = (TableMultiImageCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[TableMultiImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    [cell fillData:news];
+    
+    return cell;
+}
+
+-(UITableViewCell *) getNormalCell: (News *) news :(UITableView *) tableView :(NSIndexPath *) indexPath {
+    static NSString *cellID = @"CustomCell";
     CustomCell *cell = (CustomCell *)[tableView dequeueReusableCellWithIdentifier: cellID];
     if(cell == nil) {
         NSArray *nib = [[NSBundle mainBundle]loadNibNamed:cellID owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
-    
-    News *news = arrayNews[indexPath.row];
-    
     [cell fillData:news];
-    
     return cell;
-    
 }
 
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return UITableViewAutomaticDimension;
+}
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    News *news = arrayNews[indexPath.row];
+    if (news.images.count > 2) {
+        NSString *multiCellID = @"TableMultiImageCell";
+        TableMultiImageCell *cell = (TableMultiImageCell *)[tableView dequeueReusableCellWithIdentifier: multiCellID];
+        UILabel *titleLabel = cell.titleLabel;
+        float titleLabelHeight = titleLabel.frame.size.height;
+        UIImageView *imageView = cell.imageView1;
+        float imageHeight = imageView.frame.size.height;
+        UILabel *sourceLabel = cell.sourceLabel;
+        float sourceLabelHeight = sourceLabel.frame.size.height;
+        
+        return titleLabelHeight + imageHeight + sourceLabelHeight + 15;
+    } else {
+        return UITableViewAutomaticDimension;
+    }
+}
 @end

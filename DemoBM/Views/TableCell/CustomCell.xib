@@ -15,15 +15,15 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CustomCell" rowHeight="140" id="KGk-i7-Jjw" customClass="CustomCell">
             <rect key="frame" x="0.0" y="0.0" width="349" height="140"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="349" height="139.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8xL-sP-dYr">
-                        <rect key="frame" x="15" y="15" width="85" height="60"/>
+                        <rect key="frame" x="15" y="15" width="100" height="75"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="85" id="Uv9-cN-ftd"/>
-                            <constraint firstAttribute="height" constant="60" id="asR-Pw-MpU"/>
+                            <constraint firstAttribute="width" constant="100" id="Uv9-cN-ftd"/>
+                            <constraint firstAttribute="height" constant="75" id="asR-Pw-MpU"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -31,14 +31,14 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LPV-CM-cvz">
-                        <rect key="frame" x="115" y="15" width="219" height="19.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LPV-CM-cvz">
+                        <rect key="frame" x="130" y="15" width="204" height="19.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LbI-SW-2t8">
-                        <rect key="frame" x="115" y="58.5" width="219" height="16.5"/>
+                        <rect key="frame" x="130" y="73.5" width="204" height="16.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -46,13 +46,14 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="LbI-SW-2t8" secondAttribute="trailing" constant="15" id="2Ah-zb-ZPZ"/>
-                    <constraint firstAttribute="bottom" secondItem="8xL-sP-dYr" secondAttribute="bottom" constant="15" id="2uw-qN-87h"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="8xL-sP-dYr" secondAttribute="bottom" priority="750" constant="15" id="2uw-qN-87h"/>
                     <constraint firstItem="LPV-CM-cvz" firstAttribute="top" secondItem="8xL-sP-dYr" secondAttribute="top" id="3cP-id-swa"/>
                     <constraint firstAttribute="trailing" secondItem="LPV-CM-cvz" secondAttribute="trailing" constant="15" id="Dqx-1r-OPT"/>
                     <constraint firstItem="8xL-sP-dYr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Ijj-l1-VXu"/>
-                    <constraint firstItem="LbI-SW-2t8" firstAttribute="bottom" secondItem="8xL-sP-dYr" secondAttribute="bottom" id="N4f-ef-Ycu"/>
-                    <constraint firstItem="LbI-SW-2t8" firstAttribute="top" relation="greaterThanOrEqual" secondItem="LPV-CM-cvz" secondAttribute="bottom" priority="750" constant="10" id="P8R-YY-WyK"/>
+                    <constraint firstItem="LbI-SW-2t8" firstAttribute="top" relation="greaterThanOrEqual" secondItem="LPV-CM-cvz" secondAttribute="bottom" priority="250" constant="10" id="LeG-V7-5Gi"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="LbI-SW-2t8" secondAttribute="bottom" constant="15" id="PDx-Fy-Kj7"/>
                     <constraint firstItem="8xL-sP-dYr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="THL-hG-lUV"/>
+                    <constraint firstItem="LbI-SW-2t8" firstAttribute="bottom" secondItem="8xL-sP-dYr" secondAttribute="bottom" id="WMh-BV-b89"/>
                     <constraint firstItem="LPV-CM-cvz" firstAttribute="leading" secondItem="8xL-sP-dYr" secondAttribute="trailing" constant="15" id="kPr-oD-66B"/>
                     <constraint firstItem="LbI-SW-2t8" firstAttribute="leading" secondItem="8xL-sP-dYr" secondAttribute="trailing" constant="15" id="z7J-2F-Qg7"/>
                 </constraints>

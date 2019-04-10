@@ -8,6 +8,7 @@
 
 #import "DataSource.h"
 #import "News.h"
+#import "Image.h"
 
 @implementation DataSource
 
@@ -35,9 +36,20 @@
             news.publisher = publisher;
             news.avatarURL = avatarURL;
             news.totalComments = totalComments;
-            news.date = date;            
+            news.date = date;
+            NSMutableArray *images = [[NSMutableArray alloc] init];
+            NSMutableArray *imagesDict = newsDict[@"images"];
+            for (NSDictionary *imageDict in imagesDict) {
+                Image *image = Image.new;
+                image.url = imageDict[@"url"];
+                [images addObject:image];
+            }
+            if (images.count > 0) {
+                news.images = images;
+            }
             [arrayNews addObject:news];
         }
+        
         completion(arrayNews,nil);
         
     }];
