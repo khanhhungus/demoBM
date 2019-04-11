@@ -24,15 +24,20 @@
         NSMutableArray<News *> *arrayNews = NSMutableArray.new;
         for( NSDictionary *newsDict in articlesJSON) {
             NSString *title = newsDict[@"title"];
-            if (title == nil) {
+//            if ([title isKindOfClass:NSString.class]) {
+//                continue;
+//            }
+            if (!title) {
                 continue;
             }
             NSString *publisher = newsDict[@"publisherName"];
             NSString *totalComments = newsDict[@"totalComments"];
             NSString *avatarURL = newsDict[@"avatarUrl"];
             NSNumber *date = newsDict[@"date"];
+            NSString *description = newsDict[@"description"];
             News *news = News.new;
             news.title = title;
+            news.desc = description;
             news.publisher = publisher;
             news.avatarURL = avatarURL;
             news.totalComments = totalComments;
@@ -40,9 +45,11 @@
             NSMutableArray *images = [[NSMutableArray alloc] init];
             NSMutableArray *imagesDict = newsDict[@"images"];
             for (NSDictionary *imageDict in imagesDict) {
-                Image *image = Image.new;
-                image.url = imageDict[@"url"];
-                [images addObject:image];
+                if ([imageDict isKindOfClass:NSDictionary.class]) {
+                    Image *image = Image.new;
+                    image.url = imageDict[@"url"];
+                    [images addObject:image];
+                }
             }
             if (images.count > 0) {
                 news.images = images;

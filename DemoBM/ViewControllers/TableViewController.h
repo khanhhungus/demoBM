@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomCell.h"
+#import "HotNewsCell.h"
 #import "News.h"
 
-@interface TableViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+@interface TableViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, HotNewsCellDelegate>
 
 @property(strong, nonatomic)NSMutableArray *arrayNews;
 @end

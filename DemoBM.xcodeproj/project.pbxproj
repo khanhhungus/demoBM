@@ -22,6 +22,8 @@
 		00EDB768225CD6080001AE6B /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00EDB767225CD6080001AE6B /* CollectionViewController.m */; };
 		00EDB770225CD6D10001AE6B /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00EDB76E225CD6D10001AE6B /* CollectionViewCell.m */; };
 		00EDB771225CD6D10001AE6B /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00EDB76F225CD6D10001AE6B /* CollectionViewCell.xib */; };
+		180B7423225EDD6D00C4F858 /* HotNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 180B7421225EDD6D00C4F858 /* HotNewsCell.m */; };
+		180B7424225EDD6D00C4F858 /* HotNewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180B7422225EDD6D00C4F858 /* HotNewsCell.xib */; };
 		18E72B1A225DDFCB00500D01 /* TableMultiImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E72B18225DDFCB00500D01 /* TableMultiImageCell.m */; };
 		18E72B1B225DDFCB00500D01 /* TableMultiImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E72B19225DDFCB00500D01 /* TableMultiImageCell.xib */; };
 		18E72B1E225DFE1800500D01 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E72B1D225DFE1800500D01 /* Image.m */; };
@@ -65,6 +67,9 @@
 		00EDB76D225CD6D10001AE6B /* CollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
 		00EDB76E225CD6D10001AE6B /* CollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
 		00EDB76F225CD6D10001AE6B /* CollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
+		180B7420225EDD6D00C4F858 /* HotNewsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HotNewsCell.h; sourceTree = "<group>"; };
+		180B7421225EDD6D00C4F858 /* HotNewsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HotNewsCell.m; sourceTree = "<group>"; };
+		180B7422225EDD6D00C4F858 /* HotNewsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HotNewsCell.xib; sourceTree = "<group>"; };
 		18E72B17225DDFCB00500D01 /* TableMultiImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableMultiImageCell.h; sourceTree = "<group>"; };
 		18E72B18225DDFCB00500D01 /* TableMultiImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableMultiImageCell.m; sourceTree = "<group>"; };
 		18E72B19225DDFCB00500D01 /* TableMultiImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableMultiImageCell.xib; sourceTree = "<group>"; };
@@ -159,8 +164,9 @@
 		00EDB75E225CCD000001AE6B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				18E72B13225DD38C00500D01 /* TableMultiImageCell */,
-				00EDB772225CE1810001AE6B /* TableCell */,
+				180B741F225EDD1D00C4F858 /* HotNewsCell */,
+				18E72B13225DD38C00500D01 /* MultiImageCell */,
+				00EDB772225CE1810001AE6B /* NormalNewsCell */,
 				00EDB769225CD6A10001AE6B /* CollectionCell */,
 			);
 			path = Views;
@@ -212,24 +218,34 @@
 			path = CollectionCell;
 			sourceTree = "<group>";
 		};
-		00EDB772225CE1810001AE6B /* TableCell */ = {
+		00EDB772225CE1810001AE6B /* NormalNewsCell */ = {
 			isa = PBXGroup;
 			children = (
 				00EDB74E225B931B0001AE6B /* CustomCell.h */,
 				00EDB74F225B931B0001AE6B /* CustomCell.m */,
 				00EDB750225B931B0001AE6B /* CustomCell.xib */,
 			);
-			path = TableCell;
+			path = NormalNewsCell;
 			sourceTree = "<group>";
 		};
-		18E72B13225DD38C00500D01 /* TableMultiImageCell */ = {
+		180B741F225EDD1D00C4F858 /* HotNewsCell */ = {
+			isa = PBXGroup;
+			children = (
+				180B7420225EDD6D00C4F858 /* HotNewsCell.h */,
+				180B7421225EDD6D00C4F858 /* HotNewsCell.m */,
+				180B7422225EDD6D00C4F858 /* HotNewsCell.xib */,
+			);
+			path = HotNewsCell;
+			sourceTree = "<group>";
+		};
+		18E72B13225DD38C00500D01 /* MultiImageCell */ = {
 			isa = PBXGroup;
 			children = (
 				18E72B17225DDFCB00500D01 /* TableMultiImageCell.h */,
 				18E72B18225DDFCB00500D01 /* TableMultiImageCell.m */,
 				18E72B19225DDFCB00500D01 /* TableMultiImageCell.xib */,
 			);
-			path = TableMultiImageCell;
+			path = MultiImageCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -317,6 +333,7 @@
 				00EDB730225B48460001AE6B /* Assets.xcassets in Resources */,
 				00EDB752225B931B0001AE6B /* CustomCell.xib in Resources */,
 				00EDB72E225B48440001AE6B /* Main.storyboard in Resources */,
+				180B7424225EDD6D00C4F858 /* HotNewsCell.xib in Resources */,
 				00EDB771225CD6D10001AE6B /* CollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -339,6 +356,7 @@
 				00EDB768225CD6080001AE6B /* CollectionViewController.m in Sources */,
 				00EDB755225C7B000001AE6B /* News.m in Sources */,
 				18E72B1A225DDFCB00500D01 /* TableMultiImageCell.m in Sources */,
+				180B7423225EDD6D00C4F858 /* HotNewsCell.m in Sources */,
 				00EDB72B225B48440001AE6B /* TableViewController.m in Sources */,
 				00EDB770225CD6D10001AE6B /* CollectionViewCell.m in Sources */,
 				00EDB75B225CBB4E0001AE6B /* DataSource.m in Sources */,

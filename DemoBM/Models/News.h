@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface News : NSObject
 
 @property (strong, nonatomic) NSString *title;
+@property (strong, nonatomic) NSString *desc;
 @property (strong, nonatomic) NSString *publisher;
 @property (strong, nonatomic) NSString *avatarURL;
 @property (strong, nonatomic) NSString *totalComments;

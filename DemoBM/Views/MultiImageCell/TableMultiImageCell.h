@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIImageView *imageView2;
 @property (nonatomic, strong) UIImageView *imageView3;
 @property (nonatomic, strong) UILabel *sourceLabel;
+@property float heightCell;
 
 - (void)fillData:(News*) news;
 @end

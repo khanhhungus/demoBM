@@ -7,8 +7,7 @@
 //
 
 #import "CustomCell.h"
-#import "News.h"
-#import "FormatTime.h"
+
 
 @interface CustomCell ()
 
