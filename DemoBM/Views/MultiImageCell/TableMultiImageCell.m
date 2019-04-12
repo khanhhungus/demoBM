@@ -11,7 +11,13 @@
 #import "Image.h"
 
 
-@implementation TableMultiImageCell
+@implementation TableMultiImageCell {
+    float maxWidth;
+    float margin;
+    float spacing;
+    float widthItem;
+    FormatString *calculateString;
+}
 @synthesize titleLabel = _titleLabel;
 @synthesize imageView1 = _imageView1;
 @synthesize imageView2 = _imageView2;
@@ -28,53 +34,43 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
 
     if (self) {
-        
-        float spacing = 10;
-        float margin = 15;
+        calculateString = [[FormatString alloc] init];
         CGFloat widthScreen  = [UIScreen mainScreen].bounds.size.width;
-        float widthItem = (widthScreen / 3 ) - margin ;
+        spacing = 10;
+        margin = 15;
+        maxWidth = widthScreen - margin*2;
+        widthItem = (widthScreen / 3 ) - margin ;
 
-        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, widthScreen - 30, 45)];
+        self.titleLabel = [[UILabel alloc] init];
         self.titleLabel.numberOfLines = 3;
         self.titleLabel.textColor = [UIColor blackColor];
         self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.0f];
         [self addSubview: self.titleLabel];
-
         
-        float yImage = self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height;
         self.imageView1 = [[UIImageView alloc] init];
-        [self.imageView1 setFrame: CGRectMake(15, yImage, widthItem, 75)];
-        [self.imageView1 setImage: [UIImage imageNamed: @"grayBackground.jpg"]];
         self.imageView1.layer.cornerRadius = 5.0;
         self.imageView1.clipsToBounds = true;
         self.imageView1.contentMode = UIViewContentModeScaleAspectFill;
         [self addSubview: self.imageView1];
 
         self.imageView2 = [[UIImageView alloc] init];
-        [self.imageView2 setFrame: CGRectMake(self.imageView1.frame.origin.x + widthItem + spacing, yImage, widthItem, 75)];
-        [self.imageView2 setImage: [UIImage imageNamed: @"grayBackground.jpg"]];
         self.imageView2.layer.cornerRadius = 5.0;
         self.imageView2.clipsToBounds = true;
         self.imageView2.contentMode = UIViewContentModeScaleAspectFill;
         [self addSubview: self.imageView2];
 
         self.imageView3 = [[UIImageView alloc] init];
-        [self.imageView3 setFrame: CGRectMake(self.imageView2.frame.origin.x + widthItem + spacing, yImage, widthItem, 75)];
-        [self.imageView3 setImage: [UIImage imageNamed: @"grayBackground.jpg"]];
         self.imageView3.layer.cornerRadius = 5.0;
         self.imageView3.clipsToBounds = true;
         self.imageView3.contentMode = UIViewContentModeScaleAspectFill;
         [self addSubview: self.imageView3];
         
-        float ySourceLabel = yImage + self.imageView1.frame.size.height;
-        self.sourceLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, ySourceLabel, widthScreen - 30, 25)];
+        self.sourceLabel = [[UILabel alloc] init];
         self.sourceLabel.numberOfLines = 0;
         self.sourceLabel.textColor = [UIColor lightGrayColor];
         self.sourceLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
         [self addSubview: self.sourceLabel];
         
-        self.heightCell = ySourceLabel + self.sourceLabel.frame.size.height;
-
     }
     return self;
 }
@@ -82,9 +78,8 @@
 - (void)fillData:(News *) news {
     self.titleLabel.text = news.title;
     self.sourceLabel.text = news.publisher;
+    [self updateFrames:news];
     NSUInteger count = 0;
-
-
     for (Image *img in news.images) {
         dispatch_async(dispatch_get_global_queue(0,0), ^{
             
@@ -107,6 +102,18 @@
         });
         count++;
     }
+}
+
+- (void) updateFrames:(News *)news {
+    float heightTitle = [calculateString heightForString:news.title font:[UIFont fontWithName:@"HelveticaNeue-Medium" size:16.0f] maxWidth: maxWidth];
+    
+    [self.titleLabel setFrame:CGRectMake(margin, margin, maxWidth, heightTitle)];
+    float yImage = self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + spacing;
+    [self.imageView1 setFrame: CGRectMake(15, yImage, widthItem, 75)];
+    [self.imageView2 setFrame: CGRectMake(self.imageView1.frame.origin.x + widthItem + spacing, yImage, widthItem, 75)];
+    [self.imageView3 setFrame: CGRectMake(self.imageView2.frame.origin.x + widthItem + spacing, yImage, widthItem, 75)];
+    float ySourceLabel = yImage + self.imageView1.frame.size.height + spacing;
+    [self.sourceLabel setFrame:CGRectMake(margin, ySourceLabel, maxWidth, 25)];    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

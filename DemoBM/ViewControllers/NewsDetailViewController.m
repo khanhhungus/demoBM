@@ -11,6 +11,8 @@
 @interface NewsDetailViewController () {
     float margin;
     float maxWidth;
+    FormatString *calculateString;
+    NSMutableDictionary *cellHeightDict;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
@@ -19,9 +21,8 @@ static NSString *headerCellID = @"NewsDetailHeaderCell";
 static NSString *publisherCellID = @"NewsDetailPublisherCell";
 static NSString *descriptionCellID = @"NewsDetailDescriptionCell";
 static NSString *thumbnailCellID = @"NewsDetailThumbnailCell";
+static NSString *contentCellID = @"NewsDetailContentCell";
 
-FormatString *calculateString ;
-NSMutableDictionary *cellHeightDict;
 
 
 @implementation NewsDetailViewController
@@ -34,6 +35,7 @@ NSMutableDictionary *cellHeightDict;
     [[self tableView] registerClass:[NewsDetailPublisherCell class] forCellReuseIdentifier: publisherCellID];
     [[self tableView] registerClass:[NewsDetailDescriptionCell class] forCellReuseIdentifier: descriptionCellID];
     [[self tableView] registerClass:[NewsDetailThumbnailCell class] forCellReuseIdentifier: thumbnailCellID];
+    [[self tableView] registerClass:[NewsDetailContentCell class] forCellReuseIdentifier: contentCellID];
 
     calculateString = [[FormatString alloc] init];
     cellHeightDict = [[NSMutableDictionary alloc] init];
@@ -41,22 +43,24 @@ NSMutableDictionary *cellHeightDict;
 
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return 1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.row == 0) {
+    if (indexPath.section == 0) {
         return [self getHeaderCell:tableView :indexPath : self.news];
-    } else if (indexPath.row == 1) {
+    } else if (indexPath.section == 1) {
         return [self getPublisherCell:tableView :indexPath : self.news];
-    } else if (indexPath.row == 2) {
+    } else if (indexPath.section == 2) {
         return [self getDescriptionCell:tableView :indexPath : self.news];
-    } else if (indexPath.row == 3) {
+    } else if (indexPath.section == 3) {
         return [self getThumbnailCell:tableView :indexPath : self.news];
+    } else if (indexPath.section == 4) {
+        return [self getContentCell:tableView :indexPath : self.news];
     } else {
         return UITableViewCell.new;
     }
@@ -98,6 +102,7 @@ NSMutableDictionary *cellHeightDict;
     return cell;
 }
 
+
 - (UITableViewCell *) getPublisherCell: (UITableView *)tableView :(NSIndexPath *) indexPath :(News *) news {
     NewsDetailPublisherCell *cell = (NewsDetailPublisherCell *) [tableView dequeueReusableCellWithIdentifier: publisherCellID forIndexPath:indexPath];
     if (!cell) {
@@ -118,15 +123,34 @@ NSMutableDictionary *cellHeightDict;
     return cell;
 }
 
+- (UITableViewCell *) getContentCell: (UITableView *)tableView :(NSIndexPath *) indexPath :(News *) news {
+    NewsDetailContentCell *cell = (NewsDetailContentCell *) [tableView dequeueReusableCellWithIdentifier: contentCellID forIndexPath:indexPath];
+    if (!cell) {
+        NSArray *nib = [[NSBundle mainBundle]loadNibNamed: contentCellID owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+    }
+    float cellHeight = 0;
+    NSString *valueCell = [cellHeightDict objectForKey: contentCellID];
+    if (valueCell == nil) {
+        cellHeight = 100;
+    } else {
+        cellHeight = [valueCell doubleValue];
+    }
+    [cell fillData:news :cellHeight];
+    
+    return cell;
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
+    if (indexPath.section == 0) {
         return [self calculateHeightForHeaderCell];
-    } else if (indexPath.row == 1) {
+    } else if (indexPath.section == 1) {
         return 25;
-    } else if (indexPath.row == 2) {
+    } else if (indexPath.section == 2) {
         return [self calculateHeightForDescriptionCell];
-    }  else if (indexPath.row == 1) {
+    } else if (indexPath.section == 3) {
         return 190;
+    } else if (indexPath.section == 4) {
+        return [self calculateHeightForContentCell];
     }
         
     return 100;
@@ -157,6 +181,32 @@ NSMutableDictionary *cellHeightDict;
     }
     return cellHeight;
 }
+
+- (float) calculateHeightForContentCell {
+    float cellHeight = 0;
+    NSString *valueCell = [cellHeightDict objectForKey: contentCellID];
+    if (valueCell == nil) {
+        cellHeight = [calculateString heightForString: _news.content font:[UIFont fontWithName:@"HelveticaNeue" size:22.0f] maxWidth:maxWidth ] ;
+        NSNumber *doubleValue = [[NSNumber alloc] initWithFloat:cellHeight];
+        [cellHeightDict setValue: doubleValue forKey: contentCellID];
+    } else {
+        cellHeight = [valueCell doubleValue];
+    }
+    return cellHeight + 30;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 15;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *v = [UIView new];
+    [v setBackgroundColor:[UIColor clearColor]];
+    return v;
+}
+
 - (void)dataFillSuccess:(NSIndexPath *)indexPath {
     NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
     [indexPaths addObject: indexPath];

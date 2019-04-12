@@ -9,10 +9,18 @@
 #import "TableViewController.h"
 
 
-@interface TableViewController ()
+@interface TableViewController () {
+    NSMutableDictionary *cellHeightDict;
+    FormatString *calculateString ;
+    float margin;
+    float spacing;
+    float maxWidth;
+}
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
+
+
 
 @implementation TableViewController
 
@@ -23,7 +31,10 @@ static NSString *hotNewsCellID = @"HotNewsCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    CGFloat widthScreen  = [UIScreen mainScreen].bounds.size.width;
+    margin = 15;
+    spacing = 10;
+    maxWidth = widthScreen - margin*2;
     DataSource *dataSource = [[DataSource alloc] init];
     [dataSource fetchNewsData:^(NSMutableArray * _Nonnull arrayNews, NSError * _Nonnull error) {
         self.arrayNews = arrayNews;
@@ -35,6 +46,8 @@ static NSString *hotNewsCellID = @"HotNewsCell";
     
     [[self tableView] registerClass:[TableMultiImageCell class] forCellReuseIdentifier: multiImageCellID];
     [[self tableView] registerClass:[HotNewsCell class] forCellReuseIdentifier: hotNewsCellID];
+    cellHeightDict = [[NSMutableDictionary alloc] init];
+    calculateString = [[FormatString alloc] init];
 
 }
 
@@ -93,8 +106,7 @@ static NSString *hotNewsCellID = @"HotNewsCell";
         NSArray *nib = [[NSBundle mainBundle]loadNibNamed:hotNewsCellID owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
-    cell.delegate = self;
-    cell.indexPath = indexPath;
+
     [cell fillData:news];
     return cell;
 }
@@ -115,30 +127,50 @@ static NSString *hotNewsCellID = @"HotNewsCell";
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     News *news = arrayNews[indexPath.row];
     if (indexPath.row % 5 == 0) {
-        HotNewsCell *cell = (HotNewsCell *)[tableView dequeueReusableCellWithIdentifier: hotNewsCellID];
-        float heightThumbnail = cell.thumbnailImageView.frame.size.height;
-        float titleThumbnail = cell.titleLabel.frame.size.height;
-        float heightDescription = cell.descriptionLabel.frame.size.height;
-        float heightSource = cell.sourceLabel.frame.size.height;
-        
-        return heightThumbnail + titleThumbnail + heightDescription + heightSource + 15*3;
+        return [self calculateHeightForHotNewsCell:news];
     }
     if (news.images.count > 2) {
-
-        NSString *multiCellID = @"TableMultiImageCell";
-        TableMultiImageCell *cell = (TableMultiImageCell *)[tableView dequeueReusableCellWithIdentifier: multiCellID];
-        UILabel *titleLabel = cell.titleLabel;
-        float titleLabelHeight = titleLabel.frame.size.height;
-        UIImageView *imageView = cell.imageView1;
-        float imageHeight = imageView.frame.size.height;
-        UILabel *sourceLabel = cell.sourceLabel;
-        float sourceLabelHeight = sourceLabel.frame.size.height;
-        
-        return titleLabelHeight + imageHeight + sourceLabelHeight + 15;
-
+        return [self calculateHeightForMultiImageCell:news];
     } else {
         return UITableViewAutomaticDimension;
     }
+}
+
+- (float) calculateHeightForHotNewsCell:(News *) news {
+    float cellHeight = 0;
+    NSString *valueCell = [cellHeightDict objectForKey: news.contentID];
+    if (valueCell == nil) {
+        float titleHeight = [calculateString heightForString: news.title font:[UIFont fontWithName:@"HelveticaNeue" size:22.0f] maxWidth: maxWidth];
+        float publisherHeight = [calculateString heightForString: @"Bao moi" font:[UIFont fontWithName:@"HelveticaNeue" size:14.0f] maxWidth:maxWidth];
+        float descriptionHeight = [calculateString heightForString: news.desc font:[UIFont fontWithName:@"HelveticaNeue" size:14.0f] maxWidth: maxWidth];
+
+        float imageHeight = 190;
+        cellHeight = titleHeight + imageHeight + descriptionHeight+ publisherHeight;
+        NSNumber *doubleValue = [[NSNumber alloc] initWithFloat:cellHeight];
+        [cellHeightDict setValue: doubleValue forKey: news.contentID];
+    } else {
+        cellHeight = [valueCell doubleValue];
+    }
+    return cellHeight;
+}
+
+- (float) calculateHeightForMultiImageCell:(News *)news {
+    float cellHeight = 0;
+
+    NSString *valueCell = [cellHeightDict objectForKey: news.contentID];
+    if (valueCell == nil) {
+        float titleHeight = [calculateString heightForString: news.title font:[UIFont fontWithName:@"HelveticaNeue" size:22.0f] maxWidth: maxWidth];
+        float imageHeight = 75;
+        float publisherHeight = [calculateString heightForString: @"Bao moi" font:[UIFont fontWithName:@"HelveticaNeue" size:14.0f] maxWidth:maxWidth];
+        cellHeight = titleHeight + imageHeight + publisherHeight + spacing * 2;
+        NSNumber *doubleValue = [[NSNumber alloc] initWithFloat:cellHeight];
+        [cellHeightDict setValue: doubleValue forKey: news.contentID];
+    } else {
+        cellHeight = [valueCell doubleValue];
+    }
+    
+    return cellHeight;
+
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

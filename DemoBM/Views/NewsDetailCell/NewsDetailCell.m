@@ -11,7 +11,6 @@
 @implementation NewsDetailCell
 //@synthesize margin = _margin;
 
-static NSString *content = @"Lê Dương Bảo Lâm được biết đến là diễn viên hài có tiếng tại khu vực phía Nam, nổi lên từ danh hiệu quán quân Cười xuyên Việt. Tuy nhiên, thời gian gần đây anh liên tục vướng phải ồn ào không hay, nổi bật là phát ngôn muốn mang trẻ cơ nhỡ về.Đặc biệt, đoạn clip ghi lại cảnh Bảo Lâm dùng tiếng Việt để miệt thị màu da một nhân viên bán hàng người nước ngoài khiến nhiều người bất bình. Nam diễn viên gọi người bán hàng là con quỷ. Những anti-fan chửi bới nặng lời, cho rằng tôi miệt thì người da màu thì có giải thích đến mấy họ cũng chẳng buồn hiểu. Vậy nên kệ đi. Tôi chỉ nói một lần duy nhất, tôi và những người bạn đến Ấn Độ hành hương, trao quà từ thiện. Những câu nói vui vẻ cũng giống như cách tôi trò chuyện khi livestream. Tất cả là giao tiếp giữa con người với con người.";
 
 
 - (void)awakeFromNib {
@@ -72,7 +71,7 @@ static NSString *content = @"Lê Dương Bảo Lâm được biết đến là d
 
 - (void) fillData: (News *)news {
     self.titleLabel.text = news.title;
-    self.contentLabel.text = content;
+    self.contentLabel.text = news.content;
     FormatTime *formatTime = [[FormatTime alloc] init];
     double date = [news.date doubleValue];
     if (news.date != nil) {

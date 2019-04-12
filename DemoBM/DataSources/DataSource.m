@@ -36,7 +36,9 @@
             NSNumber *date = newsDict[@"date"];
             NSString *description = newsDict[@"description"];
             NSString *publisherIcon = newsDict[@"publisherIcon"];
+            NSString *contentID = newsDict[@"contentId"];
             News *news = News.new;
+            news.contentID = contentID;
             news.title = title;
             news.desc = description;
             news.publisher = publisher;
@@ -45,6 +47,7 @@
             news.totalComments = totalComments;
             news.date = date;
             news.cellHeight = [[NSDictionary alloc] init];
+            news.content = @"Lê Dương Bảo Lâm được biết đến là diễn viên hài có tiếng tại khu vực phía Nam, nổi lên từ danh hiệu quán quân Cười xuyên Việt. Tuy nhiên, thời gian gần đây anh liên tục vướng phải ồn ào không hay, nổi bật là phát ngôn muốn mang trẻ cơ nhỡ về.Đặc biệt, đoạn clip ghi lại cảnh Bảo Lâm dùng tiếng Việt để miệt thị màu da một nhân viên bán hàng người nước ngoài khiến nhiều người bất bình. Nam diễn viên gọi người bán hàng là con quỷ. Những anti-fan chửi bới nặng lời, cho rằng tôi miệt thì người da màu thì có giải thích đến mấy họ cũng chẳng buồn hiểu. Vậy nên kệ đi. Tôi chỉ nói một lần duy nhất, tôi và những người bạn đến Ấn Độ hành hương, trao quà từ thiện. Những câu nói vui vẻ cũng giống như cách tôi trò chuyện khi livestream. Tất cả là giao tiếp giữa con người với con người.";
             NSMutableArray *images = [[NSMutableArray alloc] init];
             NSMutableArray *imagesDict = newsDict[@"images"];
             for (NSDictionary *imageDict in imagesDict) {

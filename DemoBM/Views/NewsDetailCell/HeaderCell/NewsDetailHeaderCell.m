@@ -18,6 +18,8 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle: style reuseIdentifier: reuseIdentifier];
     if (self) {
+            self.selectionStyle = UITableViewCellSelectionStyleNone;
+
         CGFloat widthScreen  = [UIScreen mainScreen].bounds.size.width;
         self.margin = 15;
         self.maxWidth = widthScreen - self.margin*2;

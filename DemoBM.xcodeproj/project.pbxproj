@@ -36,6 +36,8 @@
 		18130C1E2260479500812E95 /* NewsDetailDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18130C1C2260479500812E95 /* NewsDetailDescriptionCell.xib */; };
 		18130C2622604C7000812E95 /* NewsDetailThumbnailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18130C2422604C7000812E95 /* NewsDetailThumbnailCell.m */; };
 		18130C2722604C7000812E95 /* NewsDetailThumbnailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18130C2522604C7000812E95 /* NewsDetailThumbnailCell.xib */; };
+		18130C2C22604F0B00812E95 /* NewsDetailContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18130C2A22604F0B00812E95 /* NewsDetailContentCell.m */; };
+		18130C2D22604F0B00812E95 /* NewsDetailContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18130C2B22604F0B00812E95 /* NewsDetailContentCell.xib */; };
 		18E72B1A225DDFCB00500D01 /* TableMultiImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E72B18225DDFCB00500D01 /* TableMultiImageCell.m */; };
 		18E72B1B225DDFCB00500D01 /* TableMultiImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E72B19225DDFCB00500D01 /* TableMultiImageCell.xib */; };
 		18E72B1E225DFE1800500D01 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E72B1D225DFE1800500D01 /* Image.m */; };
@@ -101,6 +103,9 @@
 		18130C2322604C7000812E95 /* NewsDetailThumbnailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewsDetailThumbnailCell.h; sourceTree = "<group>"; };
 		18130C2422604C7000812E95 /* NewsDetailThumbnailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsDetailThumbnailCell.m; sourceTree = "<group>"; };
 		18130C2522604C7000812E95 /* NewsDetailThumbnailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsDetailThumbnailCell.xib; sourceTree = "<group>"; };
+		18130C2922604F0B00812E95 /* NewsDetailContentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewsDetailContentCell.h; sourceTree = "<group>"; };
+		18130C2A22604F0B00812E95 /* NewsDetailContentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsDetailContentCell.m; sourceTree = "<group>"; };
+		18130C2B22604F0B00812E95 /* NewsDetailContentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsDetailContentCell.xib; sourceTree = "<group>"; };
 		18E72B17225DDFCB00500D01 /* TableMultiImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableMultiImageCell.h; sourceTree = "<group>"; };
 		18E72B18225DDFCB00500D01 /* TableMultiImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableMultiImageCell.m; sourceTree = "<group>"; };
 		18E72B19225DDFCB00500D01 /* TableMultiImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableMultiImageCell.xib; sourceTree = "<group>"; };
@@ -277,6 +282,7 @@
 		180B7428225F247F00C4F858 /* NewsDetailCell */ = {
 			isa = PBXGroup;
 			children = (
+				18130C2822604EF400812E95 /* ContentCell */,
 				18130C1F2260479800812E95 /* DescriptionCell */,
 				18130C192260474A00812E95 /* ThumbailCell */,
 				18130C132260435300812E95 /* PublisherCell */,
@@ -326,6 +332,16 @@
 				18130C1C2260479500812E95 /* NewsDetailDescriptionCell.xib */,
 			);
 			path = DescriptionCell;
+			sourceTree = "<group>";
+		};
+		18130C2822604EF400812E95 /* ContentCell */ = {
+			isa = PBXGroup;
+			children = (
+				18130C2922604F0B00812E95 /* NewsDetailContentCell.h */,
+				18130C2A22604F0B00812E95 /* NewsDetailContentCell.m */,
+				18130C2B22604F0B00812E95 /* NewsDetailContentCell.xib */,
+			);
+			path = ContentCell;
 			sourceTree = "<group>";
 		};
 		18E72B13225DD38C00500D01 /* MultiImageCell */ = {
@@ -420,6 +436,7 @@
 			files = (
 				18E72B1B225DDFCB00500D01 /* TableMultiImageCell.xib in Resources */,
 				18130C1E2260479500812E95 /* NewsDetailDescriptionCell.xib in Resources */,
+				18130C2D22604F0B00812E95 /* NewsDetailContentCell.xib in Resources */,
 				18130C0D22602B4A00812E95 /* NewsDetailHeaderCell.xib in Resources */,
 				18130C182260437000812E95 /* NewsDetailPublisherCell.xib in Resources */,
 				18130C2722604C7000812E95 /* NewsDetailThumbnailCell.xib in Resources */,
@@ -456,6 +473,7 @@
 				180B7423225EDD6D00C4F858 /* HotNewsCell.m in Sources */,
 				180B7434225F24C100C4F858 /* NewsDetailCell.m in Sources */,
 				18130C2622604C7000812E95 /* NewsDetailThumbnailCell.m in Sources */,
+				18130C2C22604F0B00812E95 /* NewsDetailContentCell.m in Sources */,
 				00EDB72B225B48440001AE6B /* TableViewController.m in Sources */,
 				00EDB770225CD6D10001AE6B /* CollectionViewCell.m in Sources */,
 				00EDB75B225CBB4E0001AE6B /* DataSource.m in Sources */,

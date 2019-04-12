@@ -12,6 +12,7 @@
 #import "NewsDetailHeaderCell.h"
 #import "NewsDetailPublisherCell.h"
 #import "NewsDetailDescriptionCell.h"
+#import "NewsDetailContentCell.h"
 #import "NewsDetailThumbnailCell.h"
 #import "FormatString.h"
 

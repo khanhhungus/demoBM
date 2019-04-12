@@ -1,14 +1,17 @@
 //
-//  NewsDetailDescriptionCell.m
+//  NewsDetailContentCell.m
 //  DemoBM
 //
 //  Created by CPU11738 on 4/12/19.
 //  Copyright © 2019 Khanh Hung Nguyen. All rights reserved.
 //
 
-#import "NewsDetailDescriptionCell.h"
+#import "NewsDetailContentCell.h"
 
-@implementation NewsDetailDescriptionCell
+@implementation NewsDetailContentCell {
+    float margin;
+    float maxWidth;
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -19,22 +22,21 @@
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         CGFloat widthScreen  = [UIScreen mainScreen].bounds.size.width;
-        self.margin = 15;
-        self.maxWidth = widthScreen - self.margin*2;
-        self.descriptionLabel = [[UILabel alloc] initWithFrame: CGRectMake(self.margin, 0, self.maxWidth, 100)];
-        self.descriptionLabel.numberOfLines = 0;
-        self.descriptionLabel.textColor = [UIColor blackColor];
-        self.descriptionLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:22.0f];
-        [self addSubview: self.descriptionLabel];
+        margin = 15;
+        maxWidth = widthScreen - margin*2;
+        self.contentLabel = [[UILabel alloc] initWithFrame: CGRectMake(margin, 0, maxWidth, 100)];
+        self.contentLabel.numberOfLines = 0;
+        self.contentLabel.textColor = [UIColor blackColor];
+        self.contentLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:22.0f];
+        [self addSubview: self.contentLabel];
     }
     return self;
 }
 
 - (void) fillData: (News *)news :(float )cellHeight {
-    self.descriptionLabel.text = news.desc;
-    [[self descriptionLabel] setFrame:CGRectMake(_margin, 0, _maxWidth, cellHeight)];
+    self.contentLabel.text = news.content;
+    [[self contentLabel] setFrame:CGRectMake(margin, 0, maxWidth, cellHeight)];
 }
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 }

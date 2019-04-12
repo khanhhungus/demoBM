@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface News : NSObject
 
+@property (strong, nonatomic) NSString *contentID;
 @property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) NSString *desc;
 @property (strong, nonatomic) NSString *publisher;
@@ -22,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSNumber *date;
 @property (strong, nonatomic) NSMutableArray *images;
 @property (strong, nonatomic) NSDictionary *cellHeight;
+@property (strong, nonatomic) NSString *content;
 @end
 
 NS_ASSUME_NONNULL_END
