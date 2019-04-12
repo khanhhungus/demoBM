@@ -35,13 +35,16 @@
             NSString *avatarURL = newsDict[@"avatarUrl"];
             NSNumber *date = newsDict[@"date"];
             NSString *description = newsDict[@"description"];
+            NSString *publisherIcon = newsDict[@"publisherIcon"];
             News *news = News.new;
             news.title = title;
             news.desc = description;
             news.publisher = publisher;
+            news.publisherIcon = publisherIcon;
             news.avatarURL = avatarURL;
             news.totalComments = totalComments;
             news.date = date;
+            news.cellHeight = [[NSDictionary alloc] init];
             NSMutableArray *images = [[NSMutableArray alloc] init];
             NSMutableArray *imagesDict = newsDict[@"images"];
             for (NSDictionary *imageDict in imagesDict) {

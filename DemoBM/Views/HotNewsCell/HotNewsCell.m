@@ -104,8 +104,6 @@ float spacing = 10;
     self.heightCell = 190 + heightTitle + heightDescription + 30;
 
     [self.delegate dataFillSuccess: self.indexPath];
-
-    NSLog(@"%f",self.heightCell);
 }
 
 - (CGFloat)heightForString:(NSString *)text font:(UIFont *)font maxWidth:(CGFloat)maxWidth {

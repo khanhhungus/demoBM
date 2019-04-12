@@ -16,11 +16,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) NSString *desc;
 @property (strong, nonatomic) NSString *publisher;
+@property (strong, nonatomic) NSString *publisherIcon;
 @property (strong, nonatomic) NSString *avatarURL;
 @property (strong, nonatomic) NSString *totalComments;
 @property (strong, nonatomic) NSNumber *date;
 @property (strong, nonatomic) NSMutableArray *images;
-
+@property (strong, nonatomic) NSDictionary *cellHeight;
 @end
 
 NS_ASSUME_NONNULL_END

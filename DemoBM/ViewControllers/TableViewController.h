@@ -10,6 +10,10 @@
 #import "CustomCell.h"
 #import "HotNewsCell.h"
 #import "News.h"
+#import "News.h"
+#import "DataSource.h"
+#import "TableMultiImageCell.h"
+#import "NewsDetailViewController.h"
 
 @interface TableViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, HotNewsCellDelegate>
 

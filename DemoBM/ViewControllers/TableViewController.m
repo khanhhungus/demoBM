@@ -7,9 +7,7 @@
 //
 
 #import "TableViewController.h"
-#import "News.h"
-#import "DataSource.h"
-#import "TableMultiImageCell.h"
+
 
 @interface TableViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -67,9 +65,7 @@ static NSString *hotNewsCellID = @"HotNewsCell";
 }
 
 
--(UITableViewCell *) getMultiImageCell: (News *) news :(UITableView *) tableView :(NSIndexPath *) indexPath {
-//    static NSString *cellIdentifier = @"TableMultiImageCell";
-    
+-(UITableViewCell *) getMultiImageCell: (News *) news :(UITableView *) tableView :(NSIndexPath *) indexPath {    
     TableMultiImageCell *cell = (TableMultiImageCell *)[tableView dequeueReusableCellWithIdentifier:multiImageCellID];
     if (cell == nil) {
         cell = [[TableMultiImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:multiImageCellID];
@@ -99,7 +95,6 @@ static NSString *hotNewsCellID = @"HotNewsCell";
     }
     cell.delegate = self;
     cell.indexPath = indexPath;
-    NSLog(@"getHotNewsCell %@", news.title);
     [cell fillData:news];
     return cell;
 }
@@ -121,12 +116,26 @@ static NSString *hotNewsCellID = @"HotNewsCell";
     News *news = arrayNews[indexPath.row];
     if (indexPath.row % 5 == 0) {
         HotNewsCell *cell = (HotNewsCell *)[tableView dequeueReusableCellWithIdentifier: hotNewsCellID];
-
-        return cell.heightCell;
+        float heightThumbnail = cell.thumbnailImageView.frame.size.height;
+        float titleThumbnail = cell.titleLabel.frame.size.height;
+        float heightDescription = cell.descriptionLabel.frame.size.height;
+        float heightSource = cell.sourceLabel.frame.size.height;
+        
+        return heightThumbnail + titleThumbnail + heightDescription + heightSource + 15*3;
     }
     if (news.images.count > 2) {
-        TableMultiImageCell *cell = (TableMultiImageCell *)[tableView dequeueReusableCellWithIdentifier: multiImageCellID];
-        return cell.heightCell;
+
+        NSString *multiCellID = @"TableMultiImageCell";
+        TableMultiImageCell *cell = (TableMultiImageCell *)[tableView dequeueReusableCellWithIdentifier: multiCellID];
+        UILabel *titleLabel = cell.titleLabel;
+        float titleLabelHeight = titleLabel.frame.size.height;
+        UIImageView *imageView = cell.imageView1;
+        float imageHeight = imageView.frame.size.height;
+        UILabel *sourceLabel = cell.sourceLabel;
+        float sourceLabelHeight = sourceLabel.frame.size.height;
+        
+        return titleLabelHeight + imageHeight + sourceLabelHeight + 15;
+
     } else {
         return UITableViewAutomaticDimension;
     }
@@ -134,6 +143,9 @@ static NSString *hotNewsCellID = @"HotNewsCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"%ld",(long)indexPath.row);
+    NewsDetailViewController *viewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"NewsDetailViewController"];
+    viewController.news = arrayNews[indexPath.row];
+    [self.navigationController pushViewController:viewController animated:true];
 }
 
 
