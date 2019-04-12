@@ -10,6 +10,7 @@
 #import "News.h"
 #import "NewsDetailCell.h"
 #import "NewsDetailHeaderCell.h"
+#import "NewsDetailPublisherCell.h"
 #import "FormatString.h"
 
 NS_ASSUME_NONNULL_BEGIN

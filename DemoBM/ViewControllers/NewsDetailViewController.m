@@ -13,6 +13,8 @@
 @end
 static NSString *cellID = @"NewsDetailCell";
 static NSString *headerCellID = @"NewsDetailHeaderCell";
+static NSString *publisherCellID = @"NewsDetailPublisherCell";
+
 FormatString *calculateString ;
 NSMutableDictionary *cellHeightDict;
 
@@ -22,6 +24,8 @@ NSMutableDictionary *cellHeightDict;
     
     [[self tableView] registerClass:[NewsDetailCell class] forCellReuseIdentifier: cellID];
     [[self tableView] registerClass:[NewsDetailHeaderCell class] forCellReuseIdentifier: headerCellID];
+    [[self tableView] registerClass:[NewsDetailPublisherCell class] forCellReuseIdentifier: publisherCellID];
+
     calculateString = [[FormatString alloc] init];
     cellHeightDict = [[NSMutableDictionary alloc] init];
 }
@@ -32,21 +36,15 @@ NSMutableDictionary *cellHeightDict;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return 2;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-//    NewsDetailCell *cell = (NewsDetailCell *) [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
-//    if (!cell) {
-//        NSArray *nib = [[NSBundle mainBundle]loadNibNamed: cellID owner:self options:nil];
-//        cell = [nib objectAtIndex:0];
-//    }
-//    cell.delegate = self;
-//    cell.indexPath = indexPath;
-//    [cell fillData: self.news];
-    
     if (indexPath.row == 0) {
         return [self getHeaderCell:tableView :indexPath : self.news];
+    } else if (indexPath.row == 1) {
+        return [self getPublisherCell:tableView :indexPath : self.news];
+
     } else {
         return UITableViewCell.new;
     }
@@ -70,11 +68,23 @@ NSMutableDictionary *cellHeightDict;
     return cell;
 }
 
+- (UITableViewCell *) getPublisherCell: (UITableView *)tableView :(NSIndexPath *) indexPath :(News *) news {
+    NewsDetailPublisherCell *cell = (NewsDetailPublisherCell *) [tableView dequeueReusableCellWithIdentifier: publisherCellID forIndexPath:indexPath];
+    if (!cell) {
+        NSArray *nib = [[NSBundle mainBundle]loadNibNamed: publisherCellID owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+    }
+    [cell fillData:news];
+    return cell;
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         return [self calculateHeightForHeaderCell];
+    } else if (indexPath.row == 1) {
+        return 25;
     }
+        
     return 100;
 }
 
