@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "Body.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *totalComments;
 @property (strong, nonatomic) NSNumber *date;
 @property (strong, nonatomic) NSMutableArray *images;
+@property (strong, nonatomic) NSMutableArray<Body *> *body;
 @property (strong, nonatomic) NSDictionary *cellHeight;
 @property (strong, nonatomic) NSString *content;
 @end

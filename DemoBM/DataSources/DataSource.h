@@ -7,11 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "News.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DataSource : NSObject
 - (void) fetchNewsData:(void(^)(NSMutableArray *arrayNews, NSError *error)) completion;
+- (void) fetchNewsDetail:(void(^)(News *news, NSError *error)) completion;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -8,17 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "News.h"
-#import "NewsDetailCell.h"
 #import "NewsDetailHeaderCell.h"
 #import "NewsDetailPublisherCell.h"
 #import "NewsDetailDescriptionCell.h"
 #import "NewsDetailContentCell.h"
 #import "NewsDetailThumbnailCell.h"
 #import "FormatString.h"
+#import "DataSource.h"
+#import "BodyTextCell.h"
+#import "BodyImageCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NewsDetailViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, NewsDetailCellDelegate>
+@interface NewsDetailViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) News *news;
 @end
