@@ -10,6 +10,7 @@
 #import "News.h"
 #import "FormatTime.h"
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NewsDetailPublisherCell : UITableViewCell
