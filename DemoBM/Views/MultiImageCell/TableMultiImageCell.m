@@ -107,13 +107,13 @@
 - (void) updateFrames:(News *)news {
     float heightTitle = [calculateString heightForString:news.title font:[UIFont fontWithName:@"HelveticaNeue-Medium" size:16.0f] maxWidth: maxWidth];
     
-    [self.titleLabel setFrame:CGRectMake(margin, margin, maxWidth, heightTitle)];
+    [self.titleLabel setFrame:CGRectMake(margin, 0, maxWidth, heightTitle)];
     float yImage = self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + spacing;
     [self.imageView1 setFrame: CGRectMake(15, yImage, widthItem, 75)];
     [self.imageView2 setFrame: CGRectMake(self.imageView1.frame.origin.x + widthItem + spacing, yImage, widthItem, 75)];
     [self.imageView3 setFrame: CGRectMake(self.imageView2.frame.origin.x + widthItem + spacing, yImage, widthItem, 75)];
     float ySourceLabel = yImage + self.imageView1.frame.size.height + spacing;
-    [self.sourceLabel setFrame:CGRectMake(margin, ySourceLabel, maxWidth, 25)];    
+    [self.sourceLabel setFrame:CGRectMake(margin, ySourceLabel, maxWidth, 18)];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

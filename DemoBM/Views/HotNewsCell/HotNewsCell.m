@@ -87,11 +87,11 @@
     
     float heightDescription = [self heightForString:news.desc font:[UIFont fontWithName:@"HelveticaNeue" size:14.0f] maxWidth: self.maxWidth];
     
-    float yDescription = yTitle + heightTitle;
+    float yDescription = yTitle + heightTitle + spacing;
 
     [self.descriptionLabel setFrame: CGRectMake(margin, yDescription, self.maxWidth, heightDescription)];
     float heightSource = [self heightForString: @"100 binh luan" font:[UIFont fontWithName:@"HelveticaNeue" size:14.0f] maxWidth: self.maxWidth];
-    float ySourceLabel = yDescription + self.descriptionLabel.frame.size.height;
+    float ySourceLabel = yDescription + self.descriptionLabel.frame.size.height + spacing;
     [self.sourceLabel setFrame:CGRectMake(margin, ySourceLabel, self.maxWidth, heightSource)];
 }
 

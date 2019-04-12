@@ -40,7 +40,7 @@
     NSString *convertText = [calculateString convertHTML:body.content];
     self.contentLabel.text = convertText;
     
-    float cellHeight = [calculateString heightForString:body.content font:[UIFont fontWithName:@"HelveticaNeue" size:22.0f] maxWidth:maxWidth];
+    float cellHeight = [calculateString heightForString:convertText font:[UIFont fontWithName:@"HelveticaNeue" size:22.0f] maxWidth:maxWidth];
     [[self contentLabel] setFrame:CGRectMake(margin, 0, maxWidth, cellHeight)];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

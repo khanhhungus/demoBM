@@ -140,12 +140,12 @@ static NSString *hotNewsCellID = @"HotNewsCell";
     float cellHeight = 0;
     NSString *valueCell = [cellHeightDict objectForKey: news.contentID];
     if (valueCell == nil) {
-        float titleHeight = [calculateString heightForString: news.title font:[UIFont fontWithName:@"HelveticaNeue" size:22.0f] maxWidth: maxWidth];
+        float titleHeight = [calculateString heightForString: news.title font:[UIFont fontWithName:@"HelveticaNeue-Medium" size:22.0f] maxWidth: maxWidth];
         float publisherHeight = [calculateString heightForString: @"Bao moi" font:[UIFont fontWithName:@"HelveticaNeue" size:14.0f] maxWidth:maxWidth];
         float descriptionHeight = [calculateString heightForString: news.desc font:[UIFont fontWithName:@"HelveticaNeue" size:14.0f] maxWidth: maxWidth];
 
         float imageHeight = 190;
-        cellHeight = titleHeight + imageHeight + descriptionHeight+ publisherHeight;
+        cellHeight = titleHeight + imageHeight + descriptionHeight+ publisherHeight + spacing*3;
         NSNumber *doubleValue = [[NSNumber alloc] initWithFloat:cellHeight];
         [cellHeightDict setValue: doubleValue forKey: news.contentID];
     } else {
@@ -159,11 +159,12 @@ static NSString *hotNewsCellID = @"HotNewsCell";
 
     NSString *valueCell = [cellHeightDict objectForKey: news.contentID];
     if (valueCell == nil) {
-        float titleHeight = [calculateString heightForString: news.title font:[UIFont fontWithName:@"HelveticaNeue" size:22.0f] maxWidth: maxWidth];
+        float titleHeight = [calculateString heightForString: news.title font:[UIFont fontWithName:@"HelveticaNeue-Medium" size:16.0f] maxWidth: maxWidth];
         float imageHeight = 75;
-        float publisherHeight = [calculateString heightForString: @"Bao moi" font:[UIFont fontWithName:@"HelveticaNeue" size:14.0f] maxWidth:maxWidth];
+        float publisherHeight = [calculateString heightForString: @"VietnamNet" font:[UIFont fontWithName:@"HelveticaNeue" size:14.0f] maxWidth:maxWidth];
+        
         cellHeight = titleHeight + imageHeight + publisherHeight + spacing * 2;
-        NSNumber *doubleValue = [[NSNumber alloc] initWithFloat:cellHeight];
+        NSNumber *doubleValue = [[NSNumber alloc] initWithFloat: cellHeight];
         [cellHeightDict setValue: doubleValue forKey: news.contentID];
     } else {
         cellHeight = [valueCell doubleValue];
