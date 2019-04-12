@@ -23,9 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) UILabel *contentLabel;
 @property (strong, nonatomic) UILabel *sourceLabel;
 @property (strong, nonatomic) UIImageView *iconPublisherImageView;
-@property float margin;
-@property float spacing;
-@property float maxWidth;
 @property float heightCell;
 @property (strong, nonatomic) NSIndexPath *indexPath;
 @property (nonatomic, weak) id <NewsDetailCellDelegate> delegate;

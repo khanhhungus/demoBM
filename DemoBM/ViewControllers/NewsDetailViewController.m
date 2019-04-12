@@ -8,23 +8,30 @@
 
 #import "NewsDetailViewController.h"
 
-@interface NewsDetailViewController ()
+@interface NewsDetailViewController () {
+    float margin;
+    float maxWidth;
+}
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
 static NSString *cellID = @"NewsDetailCell";
 static NSString *headerCellID = @"NewsDetailHeaderCell";
 static NSString *publisherCellID = @"NewsDetailPublisherCell";
+static NSString *descriptionCellID = @"NewsDetailDescriptionCell";
 
 FormatString *calculateString ;
 NSMutableDictionary *cellHeightDict;
 
+
 @implementation NewsDetailViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    CGFloat widthScreen  = [UIScreen mainScreen].bounds.size.width;
+    maxWidth = widthScreen - margin*2;
     [[self tableView] registerClass:[NewsDetailCell class] forCellReuseIdentifier: cellID];
     [[self tableView] registerClass:[NewsDetailHeaderCell class] forCellReuseIdentifier: headerCellID];
     [[self tableView] registerClass:[NewsDetailPublisherCell class] forCellReuseIdentifier: publisherCellID];
+    [[self tableView] registerClass:[NewsDetailDescriptionCell class] forCellReuseIdentifier: descriptionCellID];
 
     calculateString = [[FormatString alloc] init];
     cellHeightDict = [[NSMutableDictionary alloc] init];
@@ -36,7 +43,7 @@ NSMutableDictionary *cellHeightDict;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return 3;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -44,7 +51,8 @@ NSMutableDictionary *cellHeightDict;
         return [self getHeaderCell:tableView :indexPath : self.news];
     } else if (indexPath.row == 1) {
         return [self getPublisherCell:tableView :indexPath : self.news];
-
+    } else if (indexPath.row == 2) {
+        return [self getDescriptionCell:tableView :indexPath : self.news];
     } else {
         return UITableViewCell.new;
     }
@@ -57,7 +65,7 @@ NSMutableDictionary *cellHeightDict;
         cell = [nib objectAtIndex:0];
     }
     float cellHeight = 0;
-    NSString *valueCell = [cellHeightDict objectForKey: @"NewsDetailHeaderCell"];
+    NSString *valueCell = [cellHeightDict objectForKey: headerCellID];
     if (valueCell == nil) {
         cellHeight = 100;
     } else {
@@ -65,6 +73,24 @@ NSMutableDictionary *cellHeightDict;
     }
     [cell fillData:news :cellHeight];
 
+    return cell;
+}
+
+- (UITableViewCell *) getDescriptionCell: (UITableView *)tableView :(NSIndexPath *) indexPath :(News *) news {
+    NewsDetailDescriptionCell *cell = (NewsDetailDescriptionCell *) [tableView dequeueReusableCellWithIdentifier: descriptionCellID forIndexPath:indexPath];
+    if (!cell) {
+        NSArray *nib = [[NSBundle mainBundle]loadNibNamed: descriptionCellID owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+    }
+    float cellHeight = 0;
+    NSString *valueCell = [cellHeightDict objectForKey: descriptionCellID];
+    if (valueCell == nil) {
+        cellHeight = 100;
+    } else {
+        cellHeight = [valueCell doubleValue];
+    }
+    [cell fillData:news :cellHeight];
+    
     return cell;
 }
 
@@ -83,6 +109,8 @@ NSMutableDictionary *cellHeightDict;
         return [self calculateHeightForHeaderCell];
     } else if (indexPath.row == 1) {
         return 25;
+    } else if (indexPath.row == 2) {
+        return [self calculateHeightForDescriptionCell];
     }
         
     return 100;
@@ -90,13 +118,9 @@ NSMutableDictionary *cellHeightDict;
 
 - (float) calculateHeightForHeaderCell {
     float cellHeight = 0;
-    NSString *valueCell = [cellHeightDict objectForKey: @"NewsDetailHeaderCell"];
+    NSString *valueCell = [cellHeightDict objectForKey: headerCellID];
     if (valueCell == nil) {
-        CGFloat widthScreen  = [UIScreen mainScreen].bounds.size.width;
-        float margin = 15;
-        float maxWidth = widthScreen - margin*2;
-        cellHeight = [calculateString heightForString: _news.title font:[UIFont fontWithName:@"HelveticaNeue-Medium" size:24.0f] maxWidth:maxWidth ] ;
-        NSLog(@"%f",cellHeight);
+        cellHeight = [calculateString heightForString: _news.title font:[UIFont fontWithName:@"HelveticaNeue-Medium" size:26.0f] maxWidth:maxWidth ] ;
         NSNumber *doubleValue = [[NSNumber alloc] initWithFloat:cellHeight];
         [cellHeightDict setValue: doubleValue forKey: headerCellID];
     } else {
@@ -105,7 +129,18 @@ NSMutableDictionary *cellHeightDict;
     return cellHeight;
 }
 
-
+- (float) calculateHeightForDescriptionCell {
+    float cellHeight = 0;
+    NSString *valueCell = [cellHeightDict objectForKey: descriptionCellID];
+    if (valueCell == nil) {
+        cellHeight = [calculateString heightForString: _news.desc font:[UIFont fontWithName:@"HelveticaNeue-Medium" size:22.0f] maxWidth:maxWidth ] ;
+        NSNumber *doubleValue = [[NSNumber alloc] initWithFloat:cellHeight];
+        [cellHeightDict setValue: doubleValue forKey: descriptionCellID];
+    } else {
+        cellHeight = [valueCell doubleValue];
+    }
+    return cellHeight;
+}
 - (void)dataFillSuccess:(NSIndexPath *)indexPath {
     NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
     [indexPaths addObject: indexPath];

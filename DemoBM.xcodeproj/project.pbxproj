@@ -32,6 +32,8 @@
 		18130C122260319600812E95 /* FormatString.m in Sources */ = {isa = PBXBuildFile; fileRef = 18130C112260319600812E95 /* FormatString.m */; };
 		18130C172260437000812E95 /* NewsDetailPublisherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18130C152260437000812E95 /* NewsDetailPublisherCell.m */; };
 		18130C182260437000812E95 /* NewsDetailPublisherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18130C162260437000812E95 /* NewsDetailPublisherCell.xib */; };
+		18130C1D2260479500812E95 /* NewsDetailDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18130C1B2260479500812E95 /* NewsDetailDescriptionCell.m */; };
+		18130C1E2260479500812E95 /* NewsDetailDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18130C1C2260479500812E95 /* NewsDetailDescriptionCell.xib */; };
 		18E72B1A225DDFCB00500D01 /* TableMultiImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E72B18225DDFCB00500D01 /* TableMultiImageCell.m */; };
 		18E72B1B225DDFCB00500D01 /* TableMultiImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E72B19225DDFCB00500D01 /* TableMultiImageCell.xib */; };
 		18E72B1E225DFE1800500D01 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E72B1D225DFE1800500D01 /* Image.m */; };
@@ -91,6 +93,9 @@
 		18130C142260437000812E95 /* NewsDetailPublisherCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewsDetailPublisherCell.h; sourceTree = "<group>"; };
 		18130C152260437000812E95 /* NewsDetailPublisherCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsDetailPublisherCell.m; sourceTree = "<group>"; };
 		18130C162260437000812E95 /* NewsDetailPublisherCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsDetailPublisherCell.xib; sourceTree = "<group>"; };
+		18130C1A2260479500812E95 /* NewsDetailDescriptionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewsDetailDescriptionCell.h; sourceTree = "<group>"; };
+		18130C1B2260479500812E95 /* NewsDetailDescriptionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsDetailDescriptionCell.m; sourceTree = "<group>"; };
+		18130C1C2260479500812E95 /* NewsDetailDescriptionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsDetailDescriptionCell.xib; sourceTree = "<group>"; };
 		18E72B17225DDFCB00500D01 /* TableMultiImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableMultiImageCell.h; sourceTree = "<group>"; };
 		18E72B18225DDFCB00500D01 /* TableMultiImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableMultiImageCell.m; sourceTree = "<group>"; };
 		18E72B19225DDFCB00500D01 /* TableMultiImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableMultiImageCell.xib; sourceTree = "<group>"; };
@@ -267,6 +272,8 @@
 		180B7428225F247F00C4F858 /* NewsDetailCell */ = {
 			isa = PBXGroup;
 			children = (
+				18130C1F2260479800812E95 /* DescriptionCell */,
+				18130C192260474A00812E95 /* ThumbailCell */,
 				18130C132260435300812E95 /* PublisherCell */,
 				18130C0822602B2600812E95 /* HeaderCell */,
 				180B7431225F24C100C4F858 /* NewsDetailCell.h */,
@@ -294,6 +301,23 @@
 				18130C162260437000812E95 /* NewsDetailPublisherCell.xib */,
 			);
 			path = PublisherCell;
+			sourceTree = "<group>";
+		};
+		18130C192260474A00812E95 /* ThumbailCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ThumbailCell;
+			sourceTree = "<group>";
+		};
+		18130C1F2260479800812E95 /* DescriptionCell */ = {
+			isa = PBXGroup;
+			children = (
+				18130C1A2260479500812E95 /* NewsDetailDescriptionCell.h */,
+				18130C1B2260479500812E95 /* NewsDetailDescriptionCell.m */,
+				18130C1C2260479500812E95 /* NewsDetailDescriptionCell.xib */,
+			);
+			path = DescriptionCell;
 			sourceTree = "<group>";
 		};
 		18E72B13225DD38C00500D01 /* MultiImageCell */ = {
@@ -387,6 +411,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18E72B1B225DDFCB00500D01 /* TableMultiImageCell.xib in Resources */,
+				18130C1E2260479500812E95 /* NewsDetailDescriptionCell.xib in Resources */,
 				18130C0D22602B4A00812E95 /* NewsDetailHeaderCell.xib in Resources */,
 				18130C182260437000812E95 /* NewsDetailPublisherCell.xib in Resources */,
 				00EDB733225B48460001AE6B /* LaunchScreen.storyboard in Resources */,
@@ -415,6 +440,7 @@
 			files = (
 				18130C172260437000812E95 /* NewsDetailPublisherCell.m in Sources */,
 				18E72B1E225DFE1800500D01 /* Image.m in Sources */,
+				18130C1D2260479500812E95 /* NewsDetailDescriptionCell.m in Sources */,
 				00EDB768225CD6080001AE6B /* CollectionViewController.m in Sources */,
 				00EDB755225C7B000001AE6B /* News.m in Sources */,
 				18E72B1A225DDFCB00500D01 /* TableMultiImageCell.m in Sources */,
