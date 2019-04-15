@@ -11,10 +11,8 @@
 
 @interface TableViewController () {
     NSMutableDictionary *cellHeightDict;
-    FormatString *calculateString ;
-    float margin;
-    float spacing;
-    float maxWidth;
+    FormatString *formatString ;
+    Constant *constant;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -28,13 +26,12 @@
 static NSString *multiImageCellID = @"TableMultiImageCell";
 static NSString *normalNewsCellID = @"CustomCell";
 static NSString *hotNewsCellID = @"HotNewsCell";
+static NSString *fbNewsCellID = @"FBNewsCell";
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    CGFloat widthScreen  = [UIScreen mainScreen].bounds.size.width;
-    margin = 15;
-    spacing = 10;
-    maxWidth = widthScreen - margin*2;
+    constant = [[Constant alloc] init];
     DataSource *dataSource = [[DataSource alloc] init];
     [dataSource fetchNewsData:^(NSMutableArray * _Nonnull arrayNews, NSError * _Nonnull error) {
         self.arrayNews = arrayNews;
@@ -46,8 +43,10 @@ static NSString *hotNewsCellID = @"HotNewsCell";
     
     [[self tableView] registerClass:[TableMultiImageCell class] forCellReuseIdentifier: multiImageCellID];
     [[self tableView] registerClass:[HotNewsCell class] forCellReuseIdentifier: hotNewsCellID];
+    [[self tableView] registerClass:[FBNewsCell class] forCellReuseIdentifier: fbNewsCellID];
+
     cellHeightDict = [[NSMutableDictionary alloc] init];
-    calculateString = [[FormatString alloc] init];
+    formatString = [[FormatString alloc] init];
 
 }
 
@@ -67,9 +66,13 @@ static NSString *hotNewsCellID = @"HotNewsCell";
 
 -(UITableViewCell *) getTableViewCell: (News *) news :(UITableView *) tableView :(NSIndexPath *) indexPath {
     
+    if (indexPath.row % 3 == 0) {
+        return [self getFBNewsCell:news :tableView :indexPath];
+    }
     if (indexPath.row % 5 == 0) {
         return [self getHotNewsCell:news :tableView :indexPath];
     }
+    
     if ( news.images.count > 2 ) {
         return [self getMultiImageCell:news :tableView :indexPath];
     } else {
@@ -111,6 +114,17 @@ static NSString *hotNewsCellID = @"HotNewsCell";
     return cell;
 }
 
+-(UITableViewCell *) getFBNewsCell: (News *) news :(UITableView *) tableView :(NSIndexPath *) indexPath {
+    FBNewsCell *cell = (FBNewsCell *)[tableView dequeueReusableCellWithIdentifier: fbNewsCellID forIndexPath: indexPath];
+    if (!cell) {
+        NSArray *nib = [[NSBundle mainBundle]loadNibNamed:fbNewsCellID owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+    }
+    
+    [cell fillData:news];
+    return cell;
+}
+
 - (void)dataFillSuccess:(NSIndexPath *)indexPath {
     
     NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
@@ -126,6 +140,9 @@ static NSString *hotNewsCellID = @"HotNewsCell";
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     News *news = arrayNews[indexPath.row];
+    if (indexPath.row % 3 == 0) {
+        return [self calculateHeightForFBNewsCell:news];
+    }
     if (indexPath.row % 5 == 0) {
         return [self calculateHeightForHotNewsCell:news];
     }
@@ -140,12 +157,32 @@ static NSString *hotNewsCellID = @"HotNewsCell";
     float cellHeight = 0;
     NSString *valueCell = [cellHeightDict objectForKey: news.contentID];
     if (valueCell == nil) {
-        float titleHeight = [calculateString heightForString: news.title font:[UIFont fontWithName:@"HelveticaNeue-Medium" size:22.0f] maxWidth: maxWidth];
-        float publisherHeight = [calculateString heightForString: @"Bao moi" font:[UIFont fontWithName:@"HelveticaNeue" size:14.0f] maxWidth:maxWidth];
-        float descriptionHeight = [calculateString heightForString: news.desc font:[UIFont fontWithName:@"HelveticaNeue" size:14.0f] maxWidth: maxWidth];
+        float titleHeight = [formatString heightForString: news.title font:[UIFont fontWithName:@"HelveticaNeue-Medium" size:22.0f] maxWidth: constant.maxWidth];
+        float publisherHeight = [formatString heightForString: @"Bao moi" font:[UIFont fontWithName:@"HelveticaNeue" size:14.0f] maxWidth:constant.maxWidth];
+        float descriptionHeight = [formatString heightForString: news.desc font:[UIFont fontWithName:@"HelveticaNeue" size:14.0f] maxWidth: constant.maxWidth];
 
         float imageHeight = 190;
-        cellHeight = titleHeight + imageHeight + descriptionHeight+ publisherHeight + spacing*3;
+        cellHeight = titleHeight + imageHeight + descriptionHeight+ publisherHeight + constant.spacing*3;
+        NSNumber *doubleValue = [[NSNumber alloc] initWithFloat:cellHeight];
+        [cellHeightDict setValue: doubleValue forKey: news.contentID];
+    } else {
+        cellHeight = [valueCell doubleValue];
+    }
+    return cellHeight;
+}
+
+- (float) calculateHeightForFBNewsCell:(News *) news {
+    float cellHeight = 0;
+    NSString *valueCell = [cellHeightDict objectForKey: news.contentID];
+    if (valueCell == nil) {
+        
+        float heightTitle = [formatString heightForString:news.title font: [constant fontMedium: 16.0f] maxWidth: constant.maxWidth];
+        
+        float heightDescription = [formatString heightForString:news.desc font: [constant fontMedium: 14.0f] maxWidth: constant.maxWidth];
+        float imageHeight = 190;
+        float publisherImgViewHeight = 35;
+        float commentLbHeight = 18;
+        cellHeight = heightTitle + imageHeight + heightDescription + publisherImgViewHeight + commentLbHeight + constant.spacing*4;
         NSNumber *doubleValue = [[NSNumber alloc] initWithFloat:cellHeight];
         [cellHeightDict setValue: doubleValue forKey: news.contentID];
     } else {
@@ -159,11 +196,11 @@ static NSString *hotNewsCellID = @"HotNewsCell";
 
     NSString *valueCell = [cellHeightDict objectForKey: news.contentID];
     if (valueCell == nil) {
-        float titleHeight = [calculateString heightForString: news.title font:[UIFont fontWithName:@"HelveticaNeue-Medium" size:16.0f] maxWidth: maxWidth];
+        float titleHeight = [formatString heightForString: news.title font:[constant fontMedium:16.0f] maxWidth: constant.maxWidth];
         float imageHeight = 75;
-        float publisherHeight = [calculateString heightForString: @"VietnamNet" font:[UIFont fontWithName:@"HelveticaNeue" size:14.0f] maxWidth:maxWidth];
+        float publisherHeight = [formatString heightForString: @"VietnamNet" font:[constant fontNormal:14.0f] maxWidth:constant.maxWidth];
         
-        cellHeight = titleHeight + imageHeight + publisherHeight + spacing * 2;
+        cellHeight = titleHeight + imageHeight + publisherHeight + constant.spacing * 2;
         NSNumber *doubleValue = [[NSNumber alloc] initWithFloat: cellHeight];
         [cellHeightDict setValue: doubleValue forKey: news.contentID];
     } else {
@@ -181,5 +218,13 @@ static NSString *hotNewsCellID = @"HotNewsCell";
     [self.navigationController pushViewController:viewController animated:true];
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 15;
+}
 
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *v = [UIView new];
+    [v setBackgroundColor:[UIColor clearColor]];
+    return v;
+}
 @end

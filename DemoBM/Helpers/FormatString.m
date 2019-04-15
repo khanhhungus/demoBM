@@ -23,6 +23,12 @@
     
     return height;
 }
+
+- (CGFloat)widthForString:(NSString *)text font:(UIFont *)font {
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil];
+    return [[[NSAttributedString alloc] initWithString:text attributes:attributes] size].width;
+}
+
 -(NSString *)convertHTML:(NSString *)html {
     
     NSScanner *myScanner;
@@ -37,7 +43,6 @@
         
         html = [html stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@>", text] withString:@""];
     }
-    //
     html = [html stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     return html;

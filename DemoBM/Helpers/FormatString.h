@@ -13,7 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FormatString : NSObject
 - (CGFloat)heightForString:(NSString *)text font:(UIFont *)font maxWidth:(CGFloat)maxWidth;
--(NSString *)convertHTML:(NSString *)html;
+- (NSString *)convertHTML:(NSString *)html;
+- (CGFloat)widthForString:(NSString *)text font:(UIFont *)font;
 @end
 
 NS_ASSUME_NONNULL_END

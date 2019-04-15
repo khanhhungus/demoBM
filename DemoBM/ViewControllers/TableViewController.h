@@ -13,6 +13,7 @@
 #import "DataSource.h"
 #import "TableMultiImageCell.h"
 #import "NewsDetailViewController.h"
+#import "FBNewsCell.h"
 
 @interface TableViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, HotNewsCellDelegate>
 
