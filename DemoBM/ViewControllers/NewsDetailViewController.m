@@ -42,7 +42,6 @@ static NSString *relatedCellID = @"CustomCell";
     [[self tableView] registerClass:[NewsDetailContentCell class] forCellReuseIdentifier: contentCellID];
     [[self tableView] registerClass:[BodyTextCell class] forCellReuseIdentifier: bodyTextCellID];
     [[self tableView] registerClass:[BodyImageCell class] forCellReuseIdentifier: bodyImageCellID];
-//    [[self tableView] registerClass:[CustomCell class] forCellReuseIdentifier: relatedCellID];
 
     calculateString = [[FormatString alloc] init];
     cellHeightDict = [[NSMutableDictionary alloc] init];
@@ -155,7 +154,7 @@ static NSString *relatedCellID = @"CustomCell";
     } else {
         cellHeight = [valueCell doubleValue];
     }
-    [cell fillData:news :cellHeight];
+    [cell fillData:news :0];
 
     return cell;
 }
@@ -173,7 +172,7 @@ static NSString *relatedCellID = @"CustomCell";
     } else {
         cellHeight = [valueCell doubleValue];
     }
-    [cell fillData:news :cellHeight];
+    [cell fillData:news];
     
     return cell;
 }
@@ -263,28 +262,29 @@ static NSString *relatedCellID = @"CustomCell";
 }
 
 - (float) calculateHeightForHeaderCell {
-    float cellHeight = 0;
-    NSString *valueCell = [cellHeightDict objectForKey: headerCellID];
-    if (valueCell == nil) {
-        cellHeight = [calculateString heightForString: self.news.title font:[constant fontMedium:26] maxWidth:constant.maxWidth] ;
-        NSNumber *doubleValue = [[NSNumber alloc] initWithFloat:cellHeight];
-        [cellHeightDict setValue: doubleValue forKey: headerCellID];
-    } else {
-        cellHeight = [valueCell doubleValue];
-    }
+//    float cellHeight = 0;
+//    NSString *valueCell = [cellHeightDict objectForKey: headerCellID];
+//    if (valueCell == nil) {
+        float cellHeight = [calculateString heightForString: self.news.title font:[constant fontMedium:26] maxWidth:constant.maxWidth] ;
+//        NSLog(@"%f",cellHeight);
+//        NSNumber *doubleValue = [[NSNumber alloc] initWithFloat:cellHeight];
+//        [cellHeightDict setValue: doubleValue forKey: headerCellID];
+//    } else {
+//        cellHeight = [valueCell doubleValue];
+//    }
     return cellHeight;
 }
 
 - (float) calculateHeightForDescriptionCell {
-    float cellHeight = 0;
-    NSString *valueCell = [cellHeightDict objectForKey: descriptionCellID];
-    if (valueCell == nil) {
-        cellHeight = [calculateString heightForString: self.news.desc font:[constant fontMedium:22] maxWidth:constant.maxWidth ] ;
-        NSNumber *doubleValue = [[NSNumber alloc] initWithFloat:cellHeight];
-        [cellHeightDict setValue: doubleValue forKey: descriptionCellID];
-    } else {
-        cellHeight = [valueCell doubleValue];
-    }
+//    float cellHeight = 0;
+//    NSString *valueCell = [cellHeightDict objectForKey: descriptionCellID];
+//    if (valueCell == nil) {
+        float cellHeight = [calculateString heightForString: self.news.desc font:[constant fontMedium:22] maxWidth:constant.maxWidth ] ;
+//        NSNumber *doubleValue = [[NSNumber alloc] initWithFloat:cellHeight];
+//        [cellHeightDict setValue: doubleValue forKey: descriptionCellID];
+//    } else {
+//        cellHeight = [valueCell doubleValue];
+//    }
     return cellHeight;
 }
 

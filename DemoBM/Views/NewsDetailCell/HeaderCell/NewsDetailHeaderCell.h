@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "AppLabel.h"
 #import "Constant.h"
+#import "FormatString.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

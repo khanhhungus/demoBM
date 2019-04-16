@@ -29,12 +29,12 @@
         CGFloat widthScreen  = [UIScreen mainScreen].bounds.size.width;
         self.margin = 15;
         self.maxWidth = widthScreen - self.margin*2;
-        self.iconPublisherImageView = [[UIImageView alloc] initWithFrame:CGRectMake(_margin, self.frame.origin.y, 20, 20)];
+        self.iconPublisherImageView = [[UIImageView alloc] initWithFrame:CGRectMake(_margin, 0, 20, 20)];
         self.iconPublisherImageView.image = [UIImage imageNamed: @"thumbnail.png"];
         [self addSubview: self.iconPublisherImageView];
         
         float xPublisherLabel = self.margin * 2 + _iconPublisherImageView.frame.size.width;
-        self.publisherLabel = [[UILabel alloc] initWithFrame: CGRectMake(xPublisherLabel, self.frame.origin.y, self.maxWidth - xPublisherLabel, 25)];
+        self.publisherLabel = [[UILabel alloc] initWithFrame: CGRectMake(xPublisherLabel, 0, self.maxWidth - xPublisherLabel, 25)];
         self.publisherLabel.numberOfLines = 1;
         self.publisherLabel.textColor = [UIColor lightGrayColor];
         self.publisherLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0f];

@@ -11,6 +11,9 @@
 #import "AppSubLabel.h"
 #import "Theme.h"
 #import "AppDelegate.h"
+#import "FormatString.h"
+#import "Constant.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) AppSubLabel *descriptionLabel;
 @property float margin;
 @property float maxWidth;
-- (void) fillData: (News *)news :(float )cellHeight;
+- (void) fillData: (News *)news;
 @end
 
 NS_ASSUME_NONNULL_END

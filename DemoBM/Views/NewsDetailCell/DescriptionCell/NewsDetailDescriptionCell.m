@@ -8,7 +8,11 @@
 
 #import "NewsDetailDescriptionCell.h"
 
-@implementation NewsDetailDescriptionCell
+@implementation NewsDetailDescriptionCell {
+    FormatString *formatString;
+    Constant *constant;
+    
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -21,7 +25,8 @@
         CGFloat widthScreen  = [UIScreen mainScreen].bounds.size.width;
         self.margin = 15;
         self.maxWidth = widthScreen - self.margin*2;
-        
+        formatString = FormatString.new;
+        constant = Constant.new;
         AppDelegate *appDelegate = (AppDelegate *) UIApplication.sharedApplication.delegate;
         Theme *theme = appDelegate.currentTheme;
 //        self.descriptionLabel = [[UILabel alloc] initWithFrame: CGRectMake(self.margin, 0, self.maxWidth, 100)];
@@ -34,8 +39,10 @@
     return self;
 }
 
-- (void) fillData: (News *)news :(float )cellHeight {
+- (void) fillData: (News *)news {
     self.descriptionLabel.text = news.desc;
+    float cellHeight = [formatString heightForString: news.desc font:[constant fontMedium:22] maxWidth:constant.maxWidth];
+
     [[self descriptionLabel] setFrame:CGRectMake(_margin, 0, _maxWidth, cellHeight)];
 }
 

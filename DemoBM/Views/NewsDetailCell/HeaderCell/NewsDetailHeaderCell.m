@@ -10,6 +10,7 @@
 
 @implementation NewsDetailHeaderCell {
     Constant *constant;
+    FormatString *formatString;
 }
 
 - (void)awakeFromNib {
@@ -23,6 +24,7 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         AppDelegate *appDelegate = (AppDelegate *) UIApplication.sharedApplication.delegate;
         Theme *theme = appDelegate.currentTheme;
+        formatString = FormatString.new;
         constant = [[Constant alloc] init ];
         self.titleLabel = AppLabel.new;
         self.titleLabel.numberOfLines = 0;
@@ -35,6 +37,7 @@
 
 - (void) fillData: (News *)news :(float )cellHeight {
     self.titleLabel.text = news.title;
+    cellHeight = [formatString heightForString: news.title font:[constant fontMedium:26] maxWidth:constant.maxWidth] ;
     [[self titleLabel] setFrame:CGRectMake(constant.margin, 0, constant.maxWidth, cellHeight)];
 }
 
