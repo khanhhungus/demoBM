@@ -27,7 +27,7 @@
         self.titleLabel = AppLabel.new;
         self.titleLabel.numberOfLines = 0;
         self.titleLabel.textColor = theme.labelColor;
-        self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:26.0f];
+        self.titleLabel.font = [constant fontMedium:26];
         [self addSubview: self.titleLabel];
     }
     return self;

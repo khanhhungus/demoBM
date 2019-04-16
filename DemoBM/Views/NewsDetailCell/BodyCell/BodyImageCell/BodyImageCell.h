@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "News.h"
 #import "FormatString.h"
+#import "Constant.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

@@ -64,13 +64,9 @@
     
     [UITableView.appearance setBackgroundColor: _currentTheme.backgroundColor];
     [UITableViewCell.appearance setBackgroundColor: _currentTheme.backgroundColor];
-//    UITableViewCell.appearance.backgroundColor = _currentTheme == _lightTheme ? [UIColor yellowColor] : [UIColor purpleColor];
-//    [AppLabel.appearance setTextColor: _currentTheme.labelColor];
+
     [AppLabel.appearance customColor:_currentTheme.labelColor];
-//    AppLabel.appearance.textColor = _currentTheme.labelColor;
-//    AppLabel.appearance.backgroundColor = _currentTheme == _lightTheme ? [UIColor redColor] : [UIColor blueColor];
     [AppSubLabel.appearance setTextColor:_currentTheme.secondaryLabelColor];
-//    [AppSubLabel.appearance setTextColor: _currentTheme.secondaryLabelColor];
     [UINavigationBar.appearance setBarStyle:_currentTheme.barStyle];
     [UINavigationBar.appearance setBarTintColor: _currentTheme.backgroundColor];
     [UINavigationBar.appearance setBackgroundColor:_currentTheme.backgroundColor];

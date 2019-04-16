@@ -13,6 +13,7 @@
     NSMutableDictionary *cellHeightDict;
     DataSource *dataSource;
     UISwitch *switchBtn;
+    Theme *theme;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
@@ -22,8 +23,9 @@ static NSString *publisherCellID = @"NewsDetailPublisherCell";
 static NSString *descriptionCellID = @"NewsDetailDescriptionCell";
 static NSString *thumbnailCellID = @"NewsDetailThumbnailCell";
 static NSString *contentCellID = @"NewsDetailContentCell";
-static NSString *bodyTextCell = @"BodyTextCell";
-static NSString *bodyImageCell = @"BodyImageCell";
+static NSString *bodyTextCellID = @"BodyTextCell";
+static NSString *bodyImageCellID = @"BodyImageCell";
+static NSString *relatedCellID = @"CustomCell";
 
 
 @implementation NewsDetailViewController {
@@ -38,27 +40,48 @@ static NSString *bodyImageCell = @"BodyImageCell";
     [[self tableView] registerClass:[NewsDetailDescriptionCell class] forCellReuseIdentifier: descriptionCellID];
     [[self tableView] registerClass:[NewsDetailThumbnailCell class] forCellReuseIdentifier: thumbnailCellID];
     [[self tableView] registerClass:[NewsDetailContentCell class] forCellReuseIdentifier: contentCellID];
-    [[self tableView] registerClass:[BodyTextCell class] forCellReuseIdentifier: bodyTextCell];
-    [[self tableView] registerClass:[BodyImageCell class] forCellReuseIdentifier: bodyImageCell];
+    [[self tableView] registerClass:[BodyTextCell class] forCellReuseIdentifier: bodyTextCellID];
+    [[self tableView] registerClass:[BodyImageCell class] forCellReuseIdentifier: bodyImageCellID];
+//    [[self tableView] registerClass:[CustomCell class] forCellReuseIdentifier: relatedCellID];
 
     calculateString = [[FormatString alloc] init];
     cellHeightDict = [[NSMutableDictionary alloc] init];
-    
-    DataSource *dataSource = [[DataSource alloc] init];
-    [dataSource fetchNewsDetail:^(News * _Nonnull news, NSError * _Nonnull error) {
-        self.news = news;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-        });
-    }];
-    [self addSwitchBtn];
 
+    [self addSwitchBtn];
+    [self fetchDataAPI];
+}
+
+- (void) fetchDataAPI {
+    dataSource = [[DataSource alloc] init];
+    dispatch_group_t serviceGroup = dispatch_group_create();
+    
+    dispatch_group_async(serviceGroup,dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),^{
+        dispatch_group_enter(serviceGroup);
+        [self->dataSource fetchNewsDetail:^(News * _Nonnull news, NSError * _Nonnull error) {
+            self.news = news;
+            dispatch_group_leave(serviceGroup);
+        }];
+    });
+    
+    dispatch_group_async(serviceGroup, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        dispatch_group_enter(serviceGroup);
+
+        [self->dataSource fetchRelatedNews:^(NSMutableArray * _Nonnull arrayNews, NSError * _Nonnull error) {
+            self.relatedNewsArray = arrayNews;
+            dispatch_group_leave(serviceGroup);
+        }];
+    });
+    
+    dispatch_group_notify(serviceGroup,dispatch_get_main_queue(),^{
+        [self.tableView reloadData];
+    });
+    
 }
 
 -(void) addSwitchBtn {
     switchBtn = [[UISwitch alloc] init];
     AppDelegate *appDelegate = (AppDelegate *) UIApplication.sharedApplication.delegate;
-    Theme *theme = appDelegate.currentTheme;
+    theme = appDelegate.currentTheme;
     if (theme == appDelegate.darkTheme) {
         [switchBtn setOn:YES];
     } else {
@@ -76,10 +99,16 @@ static NSString *bodyImageCell = @"BodyImageCell";
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3 + self.news.body.count ;
+    if (self.relatedNewsArray.count > 0) {
+        return 4 + self.news.body.count;
+    }
+    return 3 + self.news.body.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section == 3 + self.news.body.count) {
+        return self.relatedNewsArray.count;
+    }
     return 1;
 }
 
@@ -94,12 +123,19 @@ static NSString *bodyImageCell = @"BodyImageCell";
     } else if (indexPath.section == 3) {
         return [self getThumbnailCell:tableView :indexPath : self.news];
     } else {
-        if ([self.news.body[indexPath.section - 4].type isEqual: @"text"]) {
-            return [self getBodyTextCell:tableView :indexPath :self.news];
-        } else if ([self.news.body[indexPath.section - 4].type isEqual: @"image"]) {
-            return [self getBodyImageCell:tableView :indexPath :self.news];
+        
+        if (indexPath.section > 3 && indexPath.section < self.news.body.count + 3) {
+            if ([self.news.body[indexPath.section - 4].type isEqual: @"text"]) {
+                return [self getBodyTextCell:tableView :indexPath :self.news];
+                
+            } else if ([self.news.body[indexPath.section - 4].type isEqual: @"image"]) {
+                return [self getBodyImageCell:tableView :indexPath :self.news];
+            } else {
+                return UITableViewCell.new;
+            }
         } else {
-            return UITableViewCell.new;
+            News *news = _relatedNewsArray[indexPath.row];
+            return [self getRelatedCell:tableView :indexPath : news];
         }
     }
     
@@ -153,9 +189,9 @@ static NSString *bodyImageCell = @"BodyImageCell";
 }
 
 - (UITableViewCell *) getBodyTextCell: (UITableView *)tableView :(NSIndexPath *) indexPath :(News *) news {
-    BodyTextCell *cell = (BodyTextCell *) [tableView dequeueReusableCellWithIdentifier: bodyTextCell forIndexPath:indexPath];
+    BodyTextCell *cell = (BodyTextCell *) [tableView dequeueReusableCellWithIdentifier: bodyTextCellID forIndexPath:indexPath];
     if (!cell) {
-        NSArray *nib = [[NSBundle mainBundle]loadNibNamed: bodyTextCell owner:self options:nil];
+        NSArray *nib = [[NSBundle mainBundle]loadNibNamed: bodyTextCellID owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
     Body *body = self.news.body[indexPath.section - 4];
@@ -164,11 +200,12 @@ static NSString *bodyImageCell = @"BodyImageCell";
 }
 
 - (UITableViewCell *) getBodyImageCell: (UITableView *)tableView :(NSIndexPath *) indexPath :(News *) news {
-    BodyImageCell *cell = (BodyImageCell *) [tableView dequeueReusableCellWithIdentifier: bodyImageCell forIndexPath:indexPath];
+    BodyImageCell *cell = (BodyImageCell *) [tableView dequeueReusableCellWithIdentifier: bodyImageCellID forIndexPath:indexPath];
     if (!cell) {
-        NSArray *nib = [[NSBundle mainBundle]loadNibNamed: bodyImageCell owner:self options:nil];
+        NSArray *nib = [[NSBundle mainBundle]loadNibNamed: bodyImageCellID owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
+    cell.thumbnailImageView.image = [UIImage imageNamed:@"grayBackground.png"];
     Body *body = self.news.body[indexPath.section - 4];
     [cell fillData:body];
     return cell;
@@ -184,7 +221,25 @@ static NSString *bodyImageCell = @"BodyImageCell";
     return cell;
 }
 
+- (UITableViewCell *) getRelatedCell: (UITableView *)tableView :(NSIndexPath *) indexPath :(News *) news {
+    CustomCell *cell = (CustomCell *)[tableView dequeueReusableCellWithIdentifier: relatedCellID];
+    if(cell == nil) {
+        NSArray *nib = [[NSBundle mainBundle]loadNibNamed:relatedCellID owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+    }
+    [cell fillData:news];
+    return cell;
+    
+}
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return [self calculateRowHeight:indexPath];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [self calculateRowHeight:indexPath];
+}
+
+- (float) calculateRowHeight:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         return [self calculateHeightForHeaderCell];
     } else if (indexPath.section == 1) {
@@ -194,11 +249,15 @@ static NSString *bodyImageCell = @"BodyImageCell";
     } else if (indexPath.section == 3) {
         return 190;
     } else {
-        if ([self.news.body[indexPath.section - 4].type isEqual: @"text"]) {
-            Body *body = self.news.body[indexPath.section - 4];
-            return [self calculateHeightForBodyTextCell:body.content];
+        if (indexPath.section > 3 && indexPath.section < self.news.body.count + 3) {
+            if ([self.news.body[indexPath.section - 4].type isEqual: @"text"]) {
+                Body *body = self.news.body[indexPath.section - 4];
+                return [self calculateHeightForBodyTextCell:body.content];
+            } else {
+                return 190;
+            }
         } else {
-            return 190;
+            return UITableViewAutomaticDimension;
         }
     }
 }
@@ -207,7 +266,7 @@ static NSString *bodyImageCell = @"BodyImageCell";
     float cellHeight = 0;
     NSString *valueCell = [cellHeightDict objectForKey: headerCellID];
     if (valueCell == nil) {
-        cellHeight = [calculateString heightForString: self.news.title font:[UIFont fontWithName:@"HelveticaNeue-Medium" size:26.0f] maxWidth:constant.maxWidth ] ;
+        cellHeight = [calculateString heightForString: self.news.title font:[constant fontMedium:26] maxWidth:constant.maxWidth] ;
         NSNumber *doubleValue = [[NSNumber alloc] initWithFloat:cellHeight];
         [cellHeightDict setValue: doubleValue forKey: headerCellID];
     } else {
@@ -257,13 +316,28 @@ static NSString *bodyImageCell = @"BodyImageCell";
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return constant.margin;
+    if (section < self.news.body.count + 3) {
+        return constant.margin;
+    } else {
+        return 30;
+    }
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *v = [UIView new];
     [v setBackgroundColor:[UIColor clearColor]];
-    return v;
+    if (section < self.news.body.count + 3) {
+        return v;
+    } else {
+        float heightText = [constant heightForOneLine:[constant fontMedium:16]];
+        AppLabel *titleLb = [[AppLabel alloc] initWithFrame:CGRectMake(constant.margin, constant.margin, constant.maxWidth, heightText)];
+        titleLb.text =  @"Tin Khác";
+        titleLb.textColor = theme.secondaryLabelColor;
+        titleLb.font = [constant fontMedium:16];
+        [v addSubview:titleLb];
+        return v;
+    }
+
 }
 
 @end

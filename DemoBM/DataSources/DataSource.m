@@ -51,6 +51,29 @@
     [dataTask resume];
 }
 
+- (void) fetchRelatedNews: (void(^)(NSMutableArray *arrayNews, NSError *error)) completion {
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:@"https://data.baomoi.com/api/v1.0/article/related?apikey=ee7b8c7c7019f1b5c0674d41b125faf7&client_version=99.99.99&contentid=30368770&ctime=%20%20%201555409292&deviceName=iPhone7Plus&gy=402667000&imgsize=w300_r4x3&os=ios&sig=14ffa677e243a0c13924438107f1bdf2"] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        
+        NSError *err;
+        NSDictionary *dummyJSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error: &err];
+        NSDictionary *dataJSON = dummyJSON[@"data"];
+        NSArray *articlesJSON = dataJSON[@"articles"];
+        
+        NSMutableArray<News *> *arrayNews = NSMutableArray.new;
+        for( NSDictionary *newsDict in articlesJSON) {
+            NSString *title = newsDict[@"title"];
+            if (!title) {
+                continue;
+            }
+            News *news = [self parseData:newsDict];
+            [arrayNews addObject:news];
+        }
+        completion(arrayNews,nil);
+    }];
+    [dataTask resume];
+}
+
 - (News *) parseData:(NSDictionary *)newsDict {
     NSString *title = newsDict[@"title"];
     NSString *publisher = newsDict[@"publisherName"];
@@ -71,7 +94,7 @@
     news.totalComments = totalComments;
     news.date = date;
     news.cellHeight = [[NSDictionary alloc] init];
-    news.content = @"Lê Dương Bảo Lâm được biết đến là diễn viên hài có tiếng tại khu vực phía Nam, nổi lên từ danh hiệu quán quân Cười xuyên Việt. Tuy nhiên, thời gian gần đây anh liên tục vướng phải ồn ào không hay, nổi bật là phát ngôn muốn mang trẻ cơ nhỡ về.Đặc biệt, đoạn clip ghi lại cảnh Bảo Lâm dùng tiếng Việt để miệt thị màu da một nhân viên bán hàng người nước ngoài khiến nhiều người bất bình. Nam diễn viên gọi người bán hàng là con quỷ. Những anti-fan chửi bới nặng lời, cho rằng tôi miệt thì người da màu thì có giải thích đến mấy họ cũng chẳng buồn hiểu. Vậy nên kệ đi. Tôi chỉ nói một lần duy nhất, tôi và những người bạn đến Ấn Độ hành hương, trao quà từ thiện. Những câu nói vui vẻ cũng giống như cách tôi trò chuyện khi livestream. Tất cả là giao tiếp giữa con người với con người.";
+    news.content = @"";
     NSMutableArray *images = [[NSMutableArray alloc] init];
     NSMutableArray *imagesDict = newsDict[@"images"];
     for (NSDictionary *imageDict in imagesDict) {

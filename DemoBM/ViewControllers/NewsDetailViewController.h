@@ -13,6 +13,7 @@
 #import "NewsDetailDescriptionCell.h"
 #import "NewsDetailContentCell.h"
 #import "NewsDetailThumbnailCell.h"
+#import "CustomCell.h"
 #import "FormatString.h"
 #import "DataSource.h"
 #import "BodyTextCell.h"
@@ -26,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NewsDetailViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) News *news;
+@property (strong, nonatomic) NSMutableArray<News *> *relatedNewsArray;
 @end
 
 NS_ASSUME_NONNULL_END
