@@ -35,7 +35,10 @@
         self.source.text = [NSString stringWithFormat: @"%@ • %@ bình luận",news.publisher,news.totalComments];
 
     }
+    AppDelegate *appDelegate = (AppDelegate *) UIApplication.sharedApplication.delegate;
+    Theme *theme = appDelegate.currentTheme;
     self.title.text = news.title;
+    self.title.textColor = theme.labelColor;
 
     dispatch_async(dispatch_get_global_queue(0,0), ^{
         

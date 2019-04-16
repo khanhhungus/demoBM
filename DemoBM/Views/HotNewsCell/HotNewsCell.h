@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "News.h"
 #import "FormatTime.h"
+#import "FormatString.h"
+#import "Constant.h"
+#import "AppDelegate.h"
+#import "Theme.h"
+#import "AppLabel.h"
+#import "AppSubLabel.h"
+
 @protocol HotNewsCellDelegate <NSObject>
 @optional
 - (void)dataFillSuccess:(NSIndexPath *_Nonnull)indexPath;
@@ -18,13 +25,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HotNewsCell : UITableViewCell
 @property (strong, nonatomic) UIImageView *thumbnailImageView;
-@property (strong, nonatomic) UILabel *titleLabel;
-@property (strong, nonatomic) UILabel *descriptionLabel;
-@property (strong, nonatomic) UILabel *sourceLabel;
+@property (strong, nonatomic) AppLabel *titleLabel;
+@property (strong, nonatomic) AppLabel *descriptionLabel;
+@property (strong, nonatomic) AppSubLabel *sourceLabel;
 @property (strong, nonatomic) NSIndexPath *indexPath;
 
 @property float heightCell;
-@property float maxWidth;
 @property (nonatomic, weak) id <HotNewsCellDelegate> delegate;
 
 - (void)fillData: (News *)news;

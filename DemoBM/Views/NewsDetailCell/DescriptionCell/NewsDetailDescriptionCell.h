@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "News.h"
+#import "AppSubLabel.h"
+#import "Theme.h"
+#import "AppDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NewsDetailDescriptionCell : UITableViewCell
-@property (strong, nonatomic) UILabel *descriptionLabel;
+@property (strong, nonatomic) AppSubLabel *descriptionLabel;
 @property float margin;
 @property float maxWidth;
 - (void) fillData: (News *)news :(float )cellHeight;

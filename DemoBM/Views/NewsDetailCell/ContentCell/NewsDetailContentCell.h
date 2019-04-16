@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "News.h"
+#import "AppLabel.h"
+#import "Theme.h"
+#import "AppDelegate.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NewsDetailContentCell : UITableViewCell
-@property (strong, nonatomic) UILabel *contentLabel;
+@property (strong, nonatomic) AppLabel *contentLabel;
 - (void) fillData: (News *)news :(float )cellHeight;
 @end
 

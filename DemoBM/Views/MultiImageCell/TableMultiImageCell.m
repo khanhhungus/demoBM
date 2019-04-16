@@ -12,11 +12,9 @@
 
 
 @implementation TableMultiImageCell {
-    float maxWidth;
-    float margin;
-    float spacing;
     float widthItem;
     FormatString *calculateString;
+    Constant *constant;
 }
 @synthesize titleLabel = _titleLabel;
 @synthesize imageView1 = _imageView1;
@@ -34,16 +32,14 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
 
     if (self) {
+        constant = Constant.new;
         calculateString = [[FormatString alloc] init];
-        CGFloat widthScreen  = [UIScreen mainScreen].bounds.size.width;
-        spacing = 10;
-        margin = 15;
-        maxWidth = widthScreen - margin*2;
-        widthItem = (widthScreen / 3 ) - margin ;
-
-        self.titleLabel = [[UILabel alloc] init];
+        widthItem = (constant.maxWidth - constant.spacing*2)/ 3 ;
+        AppDelegate *appDelegate = (AppDelegate *) UIApplication.sharedApplication.delegate;
+        Theme *theme = appDelegate.currentTheme;
+        self.titleLabel = [[AppLabel alloc] init];
         self.titleLabel.numberOfLines = 3;
-        self.titleLabel.textColor = [UIColor blackColor];
+        self.titleLabel.textColor = theme.labelColor;
         self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.0f];
         [self addSubview: self.titleLabel];
         
@@ -65,9 +61,9 @@
         self.imageView3.contentMode = UIViewContentModeScaleAspectFill;
         [self addSubview: self.imageView3];
         
-        self.sourceLabel = [[UILabel alloc] init];
+        self.sourceLabel = [[AppSubLabel alloc] init];
         self.sourceLabel.numberOfLines = 0;
-        self.sourceLabel.textColor = [UIColor lightGrayColor];
+        self.sourceLabel.textColor = theme.secondaryLabelColor;
         self.sourceLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
         [self addSubview: self.sourceLabel];
         
@@ -105,15 +101,15 @@
 }
 
 - (void) updateFrames:(News *)news {
-    float heightTitle = [calculateString heightForString:news.title font:[UIFont fontWithName:@"HelveticaNeue-Medium" size:16.0f] maxWidth: maxWidth];
+    float heightTitle = [calculateString heightForString:news.title font:[constant fontMedium:16.0] maxWidth: constant.maxWidth];
     
-    [self.titleLabel setFrame:CGRectMake(margin, 0, maxWidth, heightTitle)];
-    float yImage = self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + spacing;
+    [self.titleLabel setFrame:CGRectMake(constant.margin, 0, constant.maxWidth, heightTitle)];
+    float yImage = self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + constant.spacing;
     [self.imageView1 setFrame: CGRectMake(15, yImage, widthItem, 75)];
-    [self.imageView2 setFrame: CGRectMake(self.imageView1.frame.origin.x + widthItem + spacing, yImage, widthItem, 75)];
-    [self.imageView3 setFrame: CGRectMake(self.imageView2.frame.origin.x + widthItem + spacing, yImage, widthItem, 75)];
-    float ySourceLabel = yImage + self.imageView1.frame.size.height + spacing;
-    [self.sourceLabel setFrame:CGRectMake(margin, ySourceLabel, maxWidth, 18)];
+    [self.imageView2 setFrame: CGRectMake(self.imageView1.frame.origin.x + widthItem + constant.spacing, yImage, widthItem, 75)];
+    [self.imageView3 setFrame: CGRectMake(self.imageView2.frame.origin.x + widthItem + constant.spacing, yImage, widthItem, 75)];
+    float ySourceLabel = yImage + self.imageView1.frame.size.height + constant.spacing;
+    [self.sourceLabel setFrame:CGRectMake(constant.margin, ySourceLabel, constant.maxWidth, 18)];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

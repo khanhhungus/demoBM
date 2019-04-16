@@ -28,7 +28,9 @@ static NSString *normalNewsCellID = @"CustomCell";
 static NSString *hotNewsCellID = @"HotNewsCell";
 static NSString *fbNewsCellID = @"FBNewsCell";
 
-
+- (void)dealloc {
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     constant = [[Constant alloc] init];
@@ -45,31 +47,33 @@ static NSString *fbNewsCellID = @"FBNewsCell";
     [[self tableView] registerClass:[HotNewsCell class] forCellReuseIdentifier: hotNewsCellID];
     [[self tableView] registerClass:[FBNewsCell class] forCellReuseIdentifier: fbNewsCellID];
 
+    self.tableView.separatorColor = UIColor.clearColor;
+
     cellHeightDict = [[NSMutableDictionary alloc] init];
     formatString = [[FormatString alloc] init];
 
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return arrayNews.count;
+    return 1;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return arrayNews.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    News *news = arrayNews[indexPath.row];
+    News *news = arrayNews[indexPath.section];
     return [self getTableViewCell:news :tableView :indexPath];
 }
 
 -(UITableViewCell *) getTableViewCell: (News *) news :(UITableView *) tableView :(NSIndexPath *) indexPath {
     
-    if (indexPath.row % 3 == 0) {
+    if (indexPath.section % 3 == 0) {
         return [self getFBNewsCell:news :tableView :indexPath];
     }
-    if (indexPath.row % 5 == 0) {
+    if (indexPath.section % 5 == 0) {
         return [self getHotNewsCell:news :tableView :indexPath];
     }
     
@@ -109,7 +113,7 @@ static NSString *fbNewsCellID = @"FBNewsCell";
         NSArray *nib = [[NSBundle mainBundle]loadNibNamed:hotNewsCellID owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
-
+    
     [cell fillData:news];
     return cell;
 }
@@ -139,11 +143,11 @@ static NSString *fbNewsCellID = @"FBNewsCell";
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    News *news = arrayNews[indexPath.row];
-    if (indexPath.row % 3 == 0) {
+    News *news = arrayNews[indexPath.section];
+    if (indexPath.section % 3 == 0) {
         return [self calculateHeightForFBNewsCell:news];
     }
-    if (indexPath.row % 5 == 0) {
+    if (indexPath.section % 5 == 0) {
         return [self calculateHeightForHotNewsCell:news];
     }
     if (news.images.count > 2) {
@@ -157,12 +161,16 @@ static NSString *fbNewsCellID = @"FBNewsCell";
     float cellHeight = 0;
     NSString *valueCell = [cellHeightDict objectForKey: news.contentID];
     if (valueCell == nil) {
-        float titleHeight = [formatString heightForString: news.title font:[UIFont fontWithName:@"HelveticaNeue-Medium" size:22.0f] maxWidth: constant.maxWidth];
-        float publisherHeight = [formatString heightForString: @"Bao moi" font:[UIFont fontWithName:@"HelveticaNeue" size:14.0f] maxWidth:constant.maxWidth];
-        float descriptionHeight = [formatString heightForString: news.desc font:[UIFont fontWithName:@"HelveticaNeue" size:14.0f] maxWidth: constant.maxWidth];
-
+        float titleHeight = [formatString heightForString: news.title font:[constant fontMedium: 22.0f] maxWidth: constant.maxWidth];
+        float publisherHeight = [formatString heightForString: @"Bao moi" font:[constant fontNormal: 14.0f] maxWidth:constant.maxWidth];
+        float heightDescMax = [constant heightForOneLine:[constant fontNormal: 14.0f]] * 3;
+        float heightDescription = [formatString heightForString:news.desc font: [constant fontNormal: 14.0f] maxWidth: constant.maxWidth];
+        if (heightDescription > heightDescMax){
+            heightDescription = heightDescMax;
+        }
+        
         float imageHeight = 190;
-        cellHeight = titleHeight + imageHeight + descriptionHeight+ publisherHeight + constant.spacing*3;
+        cellHeight = titleHeight + imageHeight + heightDescription+ publisherHeight + constant.spacing*3;
         NSNumber *doubleValue = [[NSNumber alloc] initWithFloat:cellHeight];
         [cellHeightDict setValue: doubleValue forKey: news.contentID];
     } else {
@@ -178,7 +186,11 @@ static NSString *fbNewsCellID = @"FBNewsCell";
         
         float heightTitle = [formatString heightForString:news.title font: [constant fontMedium: 16.0f] maxWidth: constant.maxWidth];
         
-        float heightDescription = [formatString heightForString:news.desc font: [constant fontMedium: 14.0f] maxWidth: constant.maxWidth];
+        float heightDescMax = [constant heightForOneLine:[constant fontNormal: 14.0f]] * 3;
+        float heightDescription = [formatString heightForString:news.desc font: [constant fontNormal: 14.0f] maxWidth: constant.maxWidth];
+        if (heightDescription > heightDescMax){
+            heightDescription = heightDescMax;
+        }
         float imageHeight = 190;
         float publisherImgViewHeight = 35;
         float commentLbHeight = 18;
@@ -212,9 +224,8 @@ static NSString *fbNewsCellID = @"FBNewsCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"%ld",(long)indexPath.row);
     NewsDetailViewController *viewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"NewsDetailViewController"];
-    viewController.news = arrayNews[indexPath.row];
+    viewController.news = arrayNews[indexPath.section];
     [self.navigationController pushViewController:viewController animated:true];
 }
 

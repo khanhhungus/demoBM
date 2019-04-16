@@ -8,7 +8,10 @@
 
 #import "Constant.h"
 
-@implementation Constant
+@implementation Constant {
+    FormatString *formatString;
+}
+#define UIColorFromRGB(rgbHex) [UIColor colorWithRed:((float)((rgbHex & 0xFF0000) >> 16))/255.0 green:((float)((rgbHex & 0xFF00) >> 8))/255.0 blue:((float)(rgbHex & 0xFF))/255.0 alpha:1.0]
 
 - (instancetype)init
 {
@@ -18,6 +21,7 @@
         _margin = 15;
         _spacing = 10;
         _maxWidth = _screenWidth - _margin*2;
+        formatString = FormatString.new;
     }
     return self;
 }
@@ -29,5 +33,10 @@
 - (UIFont *)fontNormal:(CGFloat)size {
     return [UIFont fontWithName:@"HelveticaNeue" size:size];
 }
+
+-(float) heightForOneLine: (UIFont *) font {
+    return [formatString heightForString:@"1 dong " font:font maxWidth:self.maxWidth];
+}
+
 
 @end

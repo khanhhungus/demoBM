@@ -10,8 +10,8 @@
 
 
 @implementation HotNewsCell {
-    float margin;
-    float spacing;
+    Constant *constant;
+    FormatString *formatString;
 }
 
 
@@ -24,31 +24,31 @@
     self = [super initWithStyle: style reuseIdentifier: reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        CGFloat widthScreen  = [UIScreen mainScreen].bounds.size.width;
-        margin = 15;
-        spacing = 10;
-        self.maxWidth = widthScreen - margin*2;
-        self.thumbnailImageView = [[UIImageView alloc] initWithFrame: CGRectMake(margin, margin, self.maxWidth, 190)];
+        constant = Constant.new;
+        formatString = FormatString.new;
+        AppDelegate *appDelegate = (AppDelegate *) UIApplication.sharedApplication.delegate;
+        Theme *theme = appDelegate.currentTheme;
+        self.thumbnailImageView = [[UIImageView alloc] initWithFrame: CGRectMake(constant.margin, constant.margin, constant.maxWidth, 190)];
         self.thumbnailImageView.layer.cornerRadius = 5.0;
         self.thumbnailImageView.clipsToBounds = true;
         self.thumbnailImageView.contentMode = UIViewContentModeScaleAspectFill;
         [self addSubview: self.thumbnailImageView];
         
-        self.titleLabel = [[UILabel alloc] init];
+        self.titleLabel = [[AppLabel alloc] init];
         self.titleLabel.numberOfLines = 3;
-        self.titleLabel.textColor = [UIColor blackColor];
+        self.titleLabel.textColor = theme.labelColor;
         self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.0f];
         [self addSubview: self.titleLabel];
         
-        self.descriptionLabel = [[UILabel alloc] init];
+        self.descriptionLabel = [[AppLabel alloc] init];
         self.descriptionLabel.numberOfLines = 3;
-        self.descriptionLabel.textColor = [UIColor grayColor];
+        self.descriptionLabel.textColor = theme.labelColor;
         self.descriptionLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
         [self addSubview: self.descriptionLabel];
 
-        self.sourceLabel = [[UILabel alloc] init];
+        self.sourceLabel = [[AppSubLabel alloc] init];
         self.sourceLabel.numberOfLines = 1;
-        self.sourceLabel.textColor = [UIColor lightGrayColor];
+        self.sourceLabel.textColor = theme.secondaryLabelColor;
         self.sourceLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
         [self addSubview: self.sourceLabel];
 
@@ -81,18 +81,21 @@
 }
 
 - (void) updateFrame:(News *)news {
-    float heightTitle = [self heightForString:news.title font:[UIFont fontWithName:@"HelveticaNeue-Medium" size:16.0f] maxWidth: self.maxWidth];
-    float yTitle = self.thumbnailImageView.frame.size.height + spacing + margin;
-    [self.titleLabel setFrame: CGRectMake(margin, yTitle, self.maxWidth, heightTitle)];
+    float heightTitle = [self heightForString:news.title font:[UIFont fontWithName:@"HelveticaNeue-Medium" size:16.0f] maxWidth: constant.maxWidth];
+    float yTitle = self.thumbnailImageView.frame.size.height + constant.spacing + constant.margin;
+    [self.titleLabel setFrame: CGRectMake(constant.margin, yTitle, constant.maxWidth, heightTitle)];
+    float heightDescMax = [constant heightForOneLine:[constant fontNormal: 14.0f]] * 3;
+    float heightDescription = [formatString heightForString:news.desc font: [constant fontNormal: 14.0f] maxWidth: constant.maxWidth];
+    if (heightDescription > heightDescMax){
+        heightDescription = heightDescMax;
+    }
     
-    float heightDescription = [self heightForString:news.desc font:[UIFont fontWithName:@"HelveticaNeue" size:14.0f] maxWidth: self.maxWidth];
-    
-    float yDescription = yTitle + heightTitle + spacing;
+    float yDescription = yTitle + heightTitle + constant.spacing;
 
-    [self.descriptionLabel setFrame: CGRectMake(margin, yDescription, self.maxWidth, heightDescription)];
-    float heightSource = [self heightForString: @"100 binh luan" font:[UIFont fontWithName:@"HelveticaNeue" size:14.0f] maxWidth: self.maxWidth];
-    float ySourceLabel = yDescription + self.descriptionLabel.frame.size.height + spacing;
-    [self.sourceLabel setFrame:CGRectMake(margin, ySourceLabel, self.maxWidth, heightSource)];
+    [self.descriptionLabel setFrame: CGRectMake(constant.margin, yDescription, constant.maxWidth, heightDescription)];
+    float heightSource = [constant heightForOneLine:[constant fontNormal: 14.0f]];
+    float ySourceLabel = yDescription + heightDescription + constant.spacing;
+    [self.sourceLabel setFrame:CGRectMake(constant.margin, ySourceLabel, constant.maxWidth, heightSource)];
 }
 
 - (CGFloat)heightForString:(NSString *)text font:(UIFont *)font maxWidth:(CGFloat)maxWidth {

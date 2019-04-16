@@ -30,14 +30,16 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         formatString = [[FormatString alloc] init];
         constant = [[Constant alloc] init];
-        
+        AppDelegate *appDelegate = (AppDelegate *) UIApplication.sharedApplication.delegate;
+        Theme *theme = appDelegate.currentTheme;
         self.publisherImageView = [[UIImageView alloc] initWithFrame:CGRectMake(constant.margin, 0, 35, 35)];
         self.publisherImageView.image = [UIImage imageNamed: @"grayBackground.png"];
         [self addSubview: self.publisherImageView];
         
         float xPublisherLabel = constant.margin * 2 + self.publisherImageView.frame.size.width;
-        self.publisherLabel = [[UILabel alloc] initWithFrame: CGRectMake(xPublisherLabel, 0, constant.maxWidth - xPublisherLabel, 18)];
+        self.publisherLabel = [[AppLabel alloc] initWithFrame: CGRectMake(xPublisherLabel, 0, constant.maxWidth - xPublisherLabel, 18)];
         self.publisherLabel.numberOfLines = 1;
+        self.publisherLabel.textColor = theme.labelColor;
         self.publisherLabel.font = [constant fontMedium:16.0f];
         [self addSubview: self.publisherLabel];
 
@@ -47,14 +49,16 @@
         self.timeLabel.font = [constant fontNormal:12.0f];
         [self addSubview: self.timeLabel];
         
-        self.titleLabel = [[UILabel alloc] initWithFrame: CGRectMake(constant.margin, 0, constant.maxWidth, 100)];
+        self.titleLabel = [[AppLabel alloc] initWithFrame: CGRectMake(constant.margin, 0, constant.maxWidth, 100)];
+//        self.titleLabel = AppLabel.new;
+        self.titleLabel.textColor = theme.labelColor;
         self.titleLabel.numberOfLines = 3;
         self.titleLabel.font = [constant fontMedium:16.0f];
         [self addSubview: self.titleLabel];
         
-        self.descriptionLabel = [[UILabel alloc] initWithFrame: CGRectMake(constant.margin, 0, constant.maxWidth, 100)];
+        self.descriptionLabel = [[AppLabel alloc] initWithFrame: CGRectMake(constant.margin, 0, constant.maxWidth, 0)];
         self.descriptionLabel.numberOfLines = 3;
-        self.descriptionLabel.textColor = [UIColor grayColor];
+        self.descriptionLabel.textColor = theme.secondaryLabelColor;
         self.descriptionLabel.font = [constant fontNormal:14.0f];
         [self addSubview: self.descriptionLabel];
         
@@ -114,8 +118,12 @@
     float heightTitle = [formatString heightForString:news.title font: [constant fontMedium: 16.0f] maxWidth: constant.maxWidth];
     float yTitle = self.publisherImageView.frame.origin.y + self.publisherImageView.frame.size.height + constant.spacing;
     [self.titleLabel setFrame:CGRectMake(constant.margin, yTitle, constant.maxWidth, heightTitle)];
+    float heightDescMax = [constant heightForOneLine:[constant fontNormal: 14.0f]] * 3;
+    float heightDescription = [formatString heightForString:news.desc font: [constant fontNormal: 14.0f] maxWidth: constant.maxWidth];
+    if (heightDescription > heightDescMax){
+        heightDescription = heightDescMax;
+    }
     
-    float heightDescription = [formatString heightForString:news.desc font: [constant fontMedium: 14.0f] maxWidth: constant.maxWidth];
     float yDesc = yTitle + heightTitle + constant.spacing;
     [self.descriptionLabel setFrame:CGRectMake(constant.margin, yDesc, constant.maxWidth, heightDescription)];
     float yThumbnail = yDesc + heightDescription + constant.spacing;

@@ -9,15 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "News.h"
 #import "FormatString.h"
+#import "FormatTime.h"
+#import "AppLabel.h"
+#import "AppSubLabel.h"
+#import "Constant.h"
+#import "AppDelegate.h"
+#import "Theme.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
 @interface TableMultiImageCell : UITableViewCell
-@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) AppLabel *titleLabel;
 @property (nonatomic, strong) UIImageView *imageView1;
 @property (nonatomic, strong) UIImageView *imageView2;
 @property (nonatomic, strong) UIImageView *imageView3;
-@property (nonatomic, strong) UILabel *sourceLabel;
+@property (nonatomic, strong) AppSubLabel *sourceLabel;
 @property float heightCell;
 
 - (void)fillData:(News*) news;

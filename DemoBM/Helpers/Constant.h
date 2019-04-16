@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "FormatString.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(UIFont *)fontMedium:(CGFloat)size;
 -(UIFont *)fontNormal:(CGFloat)size;
+-(float) heightForOneLine: (UIFont *) font;
+
 @end
 
 NS_ASSUME_NONNULL_END

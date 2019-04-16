@@ -7,16 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Theme.h"
 #import "News.h"
+#import "AppDelegate.h"
+#import "AppLabel.h"
+#import "Constant.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NewsDetailHeaderCell : UITableViewCell
 
-@property (strong, nonatomic) UILabel *titleLabel;
-@property float margin;
-@property float maxWidth;
+@property (strong, nonatomic) AppLabel *titleLabel;
 - (void) fillData: (News *)news :(float )cellHeight;
 @end
 

@@ -8,18 +8,81 @@
 
 #import "AppDelegate.h"
 
+
 @interface AppDelegate ()
 
 @end
 
+
 @implementation AppDelegate
+//    Theme *lightTheme;
+//    Theme *darkTheme;
+//}
+
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    _currentTheme = Theme.new;
+    _lightTheme = Theme.new;
+    _darkTheme = Theme.new;
+    
+    [_lightTheme setBackgroundColor: [UIColor whiteColor]];
+    [_lightTheme setLabelColor: [UIColor blackColor]];
+    [_lightTheme setSecondaryLabelColor:[UIColor darkGrayColor]];
+    [_lightTheme setNavigationBarColor:[UIColor whiteColor]];
+    [_lightTheme setBarStyle: UIBarStyleDefault];
+    
+    [_darkTheme setBackgroundColor: [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0]];
+    [_darkTheme setLabelColor: [UIColor whiteColor]];
+    [_darkTheme setSecondaryLabelColor:[UIColor lightGrayColor]];
+    [_darkTheme setBarStyle:UIBarStyleBlack];
+    [_darkTheme setNavigationBarColor:[UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0]];
+
+    _currentTheme = _lightTheme;
+    
+//    [AppLabel.appearance setTextColor: _currentTheme.labelColor];
+//    [AppSubLabel.appearance setTextColor: _currentTheme.secondaryLabelColor];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(changeTheme:)
+                                                 name:@"ChangeTheme" object:nil];
+    
     return YES;
 }
 
+
+- (void)changeTheme:(NSNotification *)note {
+    if (_currentTheme == _lightTheme) {
+        _currentTheme = _darkTheme;
+        NSLog(@"_darkTheme");
+    } else {
+        _currentTheme = _lightTheme;
+        NSLog(@"_lightTheme"); 
+
+    }
+    
+    [UITableView.appearance setBackgroundColor: _currentTheme.backgroundColor];
+    [UITableViewCell.appearance setBackgroundColor: _currentTheme.backgroundColor];
+//    UITableViewCell.appearance.backgroundColor = _currentTheme == _lightTheme ? [UIColor yellowColor] : [UIColor purpleColor];
+//    [AppLabel.appearance setTextColor: _currentTheme.labelColor];
+    [AppLabel.appearance customColor:_currentTheme.labelColor];
+//    AppLabel.appearance.textColor = _currentTheme.labelColor;
+//    AppLabel.appearance.backgroundColor = _currentTheme == _lightTheme ? [UIColor redColor] : [UIColor blueColor];
+    [AppSubLabel.appearance setTextColor:_currentTheme.secondaryLabelColor];
+//    [AppSubLabel.appearance setTextColor: _currentTheme.secondaryLabelColor];
+    [UINavigationBar.appearance setBarStyle:_currentTheme.barStyle];
+    [UINavigationBar.appearance setBarTintColor: _currentTheme.backgroundColor];
+    [UINavigationBar.appearance setBackgroundColor:_currentTheme.backgroundColor];
+    [UINavigationBar.appearance setTranslucent:NO];
+    
+    for (UIWindow *window in UIApplication.sharedApplication.windows) {
+        for (UIView *view in window.subviews) {
+            [view removeFromSuperview];
+            [window addSubview:view];
+        }
+    }
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

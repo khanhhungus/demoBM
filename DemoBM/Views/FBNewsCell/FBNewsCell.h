@@ -11,15 +11,18 @@
 #import "Constant.h"
 #import "FormatString.h"
 #import "FormatTime.h"
+#import "AppLabel.h"
+#import "Theme.h"
+#import "AppDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FBNewsCell : UITableViewCell
 @property (strong, nonatomic) UIImageView *thumbnailImageView;
-@property (strong, nonatomic) UILabel *titleLabel;
-@property (strong, nonatomic) UILabel *descriptionLabel;
+@property (strong, nonatomic) AppLabel *titleLabel;
+@property (strong, nonatomic) AppLabel *descriptionLabel;
 @property (strong, nonatomic) UIImageView *publisherImageView;
-@property (strong, nonatomic) UILabel *publisherLabel;
+@property (strong, nonatomic) AppLabel *publisherLabel;
 @property (strong, nonatomic) UILabel *timeLabel;
 @property (strong, nonatomic) UILabel *totalCmtLabel;
 

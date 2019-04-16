@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "News.h"
 #import "FormatString.h"
+#import "AppLabel.h"
+#import "Theme.h"
+#import "AppDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BodyTextCell : UITableViewCell
-@property (strong, nonatomic) UILabel *contentLabel;
+@property (strong, nonatomic) AppLabel *contentLabel;
 - (void) fillData: (Body *)body;
 @end
 

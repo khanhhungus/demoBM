@@ -9,8 +9,6 @@
 #import "NewsDetailViewController.h"
 
 @interface NewsDetailViewController () {
-    float margin;
-    float maxWidth;
     FormatString *calculateString;
     NSMutableDictionary *cellHeightDict;
     DataSource *dataSource;
@@ -28,12 +26,13 @@ static NSString *bodyTextCell = @"BodyTextCell";
 static NSString *bodyImageCell = @"BodyImageCell";
 
 
-@implementation NewsDetailViewController
-- (void)viewDidLoad {
+@implementation NewsDetailViewController {
+    Constant *constant;
+}
+
+-(void)viewDidLoad {
     [super viewDidLoad];
-    CGFloat widthScreen  = [UIScreen mainScreen].bounds.size.width;
-    margin = 15;
-    maxWidth = widthScreen - margin*2;
+    constant = Constant.new;
     [[self tableView] registerClass:[NewsDetailHeaderCell class] forCellReuseIdentifier: headerCellID];
     [[self tableView] registerClass:[NewsDetailPublisherCell class] forCellReuseIdentifier: publisherCellID];
     [[self tableView] registerClass:[NewsDetailDescriptionCell class] forCellReuseIdentifier: descriptionCellID];
@@ -58,18 +57,24 @@ static NSString *bodyImageCell = @"BodyImageCell";
 
 -(void) addSwitchBtn {
     switchBtn = [[UISwitch alloc] init];
+    AppDelegate *appDelegate = (AppDelegate *) UIApplication.sharedApplication.delegate;
+    Theme *theme = appDelegate.currentTheme;
+    if (theme == appDelegate.darkTheme) {
+        [switchBtn setOn:YES];
+    } else {
+        [switchBtn setOn:NO];
+    }
+    
     [switchBtn addTarget: self action:@selector(switchChange:) forControlEvents:UIControlEventValueChanged];
     UIBarButtonItem *barItem = UIBarButtonItem.new;
     [barItem setCustomView:switchBtn];
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects: barItem, nil];
 }
+
 -(void) switchChange: (id) sender {
-//    if (switchBtn.isOn) {
-//        NSLog(@"1111");
-//    }else {
-//        NSLog(@"2222");
-//    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeTheme" object:nil];
 }
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 3 + self.news.body.count ;
 }
@@ -77,6 +82,7 @@ static NSString *bodyImageCell = @"BodyImageCell";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.section == 0) {
@@ -101,6 +107,7 @@ static NSString *bodyImageCell = @"BodyImageCell";
 
 - (UITableViewCell *) getHeaderCell: (UITableView *)tableView :(NSIndexPath *) indexPath :(News *) news {
     NewsDetailHeaderCell *cell = (NewsDetailHeaderCell *) [tableView dequeueReusableCellWithIdentifier: headerCellID forIndexPath:indexPath];
+
     if (!cell) {
         NSArray *nib = [[NSBundle mainBundle]loadNibNamed: headerCellID owner:self options:nil];
         cell = [nib objectAtIndex:0];
@@ -108,7 +115,7 @@ static NSString *bodyImageCell = @"BodyImageCell";
     float cellHeight = 0;
     NSString *valueCell = [cellHeightDict objectForKey: headerCellID];
     if (valueCell == nil) {
-        cellHeight = 100;
+        cellHeight = [self calculateHeightForHeaderCell];
     } else {
         cellHeight = [valueCell doubleValue];
     }
@@ -135,7 +142,6 @@ static NSString *bodyImageCell = @"BodyImageCell";
     return cell;
 }
 
-
 - (UITableViewCell *) getPublisherCell: (UITableView *)tableView :(NSIndexPath *) indexPath :(News *) news {
     NewsDetailPublisherCell *cell = (NewsDetailPublisherCell *) [tableView dequeueReusableCellWithIdentifier: publisherCellID forIndexPath:indexPath];
     if (!cell) {
@@ -156,6 +162,7 @@ static NSString *bodyImageCell = @"BodyImageCell";
     [cell fillData:body];
     return cell;
 }
+
 - (UITableViewCell *) getBodyImageCell: (UITableView *)tableView :(NSIndexPath *) indexPath :(News *) news {
     BodyImageCell *cell = (BodyImageCell *) [tableView dequeueReusableCellWithIdentifier: bodyImageCell forIndexPath:indexPath];
     if (!cell) {
@@ -200,7 +207,7 @@ static NSString *bodyImageCell = @"BodyImageCell";
     float cellHeight = 0;
     NSString *valueCell = [cellHeightDict objectForKey: headerCellID];
     if (valueCell == nil) {
-        cellHeight = [calculateString heightForString: self.news.title font:[UIFont fontWithName:@"HelveticaNeue-Medium" size:26.0f] maxWidth:maxWidth ] ;
+        cellHeight = [calculateString heightForString: self.news.title font:[UIFont fontWithName:@"HelveticaNeue-Medium" size:26.0f] maxWidth:constant.maxWidth ] ;
         NSNumber *doubleValue = [[NSNumber alloc] initWithFloat:cellHeight];
         [cellHeightDict setValue: doubleValue forKey: headerCellID];
     } else {
@@ -213,7 +220,7 @@ static NSString *bodyImageCell = @"BodyImageCell";
     float cellHeight = 0;
     NSString *valueCell = [cellHeightDict objectForKey: descriptionCellID];
     if (valueCell == nil) {
-        cellHeight = [calculateString heightForString: self.news.desc font:[UIFont fontWithName:@"HelveticaNeue-Medium" size:22.0f] maxWidth:maxWidth ] ;
+        cellHeight = [calculateString heightForString: self.news.desc font:[constant fontMedium:22] maxWidth:constant.maxWidth ] ;
         NSNumber *doubleValue = [[NSNumber alloc] initWithFloat:cellHeight];
         [cellHeightDict setValue: doubleValue forKey: descriptionCellID];
     } else {
@@ -226,7 +233,7 @@ static NSString *bodyImageCell = @"BodyImageCell";
     float cellHeight = 0;
     NSString *valueCell = [cellHeightDict objectForKey: contentCellID];
     if (valueCell == nil) {
-        cellHeight = [calculateString heightForString: _news.content font:[UIFont fontWithName:@"HelveticaNeue" size:22.0f] maxWidth:maxWidth ] ;
+        cellHeight = [calculateString heightForString: _news.content font:[constant fontNormal:22] maxWidth:constant.maxWidth] ;
         NSNumber *doubleValue = [[NSNumber alloc] initWithFloat:cellHeight];
         [cellHeightDict setValue: doubleValue forKey: contentCellID];
     } else {
@@ -240,7 +247,7 @@ static NSString *bodyImageCell = @"BodyImageCell";
     NSString *valueCell = [cellHeightDict objectForKey: content];
     if (valueCell == nil) {
         NSString *convertText = [calculateString convertHTML:content];
-        cellHeight = [calculateString heightForString: convertText font:[UIFont fontWithName:@"HelveticaNeue" size:22.0f] maxWidth:maxWidth] ;
+        cellHeight = [calculateString heightForString: convertText font:[constant fontNormal:22] maxWidth:constant.maxWidth] ;
         NSNumber *doubleValue = [[NSNumber alloc] initWithFloat:cellHeight];
         [cellHeightDict setValue: doubleValue forKey: content];
     } else {
@@ -249,9 +256,8 @@ static NSString *bodyImageCell = @"BodyImageCell";
     return cellHeight;
 }
 
-
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 15;
+    return constant.margin;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

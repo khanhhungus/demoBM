@@ -44,9 +44,13 @@
 		18130C3B22608C3100812E95 /* BodyTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18130C3922608C3100812E95 /* BodyTextCell.xib */; };
 		18130C3F22608C4200812E95 /* BodyImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18130C3D22608C4200812E95 /* BodyImageCell.m */; };
 		18130C4022608C4200812E95 /* BodyImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18130C3E22608C4200812E95 /* BodyImageCell.xib */; };
+		18D66F03226577EC00CE3F67 /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D66F02226577EC00CE3F67 /* Theme.m */; };
+		18D66F0622657E5300CE3F67 /* AppLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D66F0522657E5300CE3F67 /* AppLabel.m */; };
+		18D66F092265808E00CE3F67 /* AppSubLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D66F082265808E00CE3F67 /* AppSubLabel.m */; };
 		18E72B1A225DDFCB00500D01 /* TableMultiImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E72B18225DDFCB00500D01 /* TableMultiImageCell.m */; };
 		18E72B1B225DDFCB00500D01 /* TableMultiImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E72B19225DDFCB00500D01 /* TableMultiImageCell.xib */; };
 		18E72B1E225DFE1800500D01 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E72B1D225DFE1800500D01 /* Image.m */; };
+		18FE25A52265CF890089D370 /* UILabel+common.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FE25A42265CF890089D370 /* UILabel+common.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,11 +126,19 @@
 		18130C3C22608C4200812E95 /* BodyImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BodyImageCell.h; sourceTree = "<group>"; };
 		18130C3D22608C4200812E95 /* BodyImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BodyImageCell.m; sourceTree = "<group>"; };
 		18130C3E22608C4200812E95 /* BodyImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BodyImageCell.xib; sourceTree = "<group>"; };
+		18D66F01226577EC00CE3F67 /* Theme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Theme.h; sourceTree = "<group>"; };
+		18D66F02226577EC00CE3F67 /* Theme.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Theme.m; sourceTree = "<group>"; };
+		18D66F0422657E5300CE3F67 /* AppLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppLabel.h; sourceTree = "<group>"; };
+		18D66F0522657E5300CE3F67 /* AppLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppLabel.m; sourceTree = "<group>"; };
+		18D66F072265808E00CE3F67 /* AppSubLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppSubLabel.h; sourceTree = "<group>"; };
+		18D66F082265808E00CE3F67 /* AppSubLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppSubLabel.m; sourceTree = "<group>"; };
 		18E72B17225DDFCB00500D01 /* TableMultiImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableMultiImageCell.h; sourceTree = "<group>"; };
 		18E72B18225DDFCB00500D01 /* TableMultiImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableMultiImageCell.m; sourceTree = "<group>"; };
 		18E72B19225DDFCB00500D01 /* TableMultiImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableMultiImageCell.xib; sourceTree = "<group>"; };
 		18E72B1C225DFE1800500D01 /* Image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
 		18E72B1D225DFE1800500D01 /* Image.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
+		18FE25A32265CF890089D370 /* UILabel+common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+common.h"; sourceTree = "<group>"; };
+		18FE25A42265CF890089D370 /* UILabel+common.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+common.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,6 +225,14 @@
 				18E72B1D225DFE1800500D01 /* Image.m */,
 				18130C2E226086A400812E95 /* Body.h */,
 				18130C2F226086A400812E95 /* Body.m */,
+				18D66F01226577EC00CE3F67 /* Theme.h */,
+				18D66F02226577EC00CE3F67 /* Theme.m */,
+				18D66F0422657E5300CE3F67 /* AppLabel.h */,
+				18D66F0522657E5300CE3F67 /* AppLabel.m */,
+				18D66F072265808E00CE3F67 /* AppSubLabel.h */,
+				18D66F082265808E00CE3F67 /* AppSubLabel.m */,
+				18FE25A32265CF890089D370 /* UILabel+common.h */,
+				18FE25A42265CF890089D370 /* UILabel+common.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -536,14 +556,18 @@
 				18130C2C22604F0B00812E95 /* NewsDetailContentCell.m in Sources */,
 				00EDB72B225B48440001AE6B /* TableViewController.m in Sources */,
 				00EDB770225CD6D10001AE6B /* CollectionViewCell.m in Sources */,
+				18D66F0622657E5300CE3F67 /* AppLabel.m in Sources */,
 				00EDB75B225CBB4E0001AE6B /* DataSource.m in Sources */,
+				18FE25A52265CF890089D370 /* UILabel+common.m in Sources */,
 				00EDB736225B48460001AE6B /* main.m in Sources */,
 				00EDB751225B931B0001AE6B /* CustomCell.m in Sources */,
 				18130C0C22602B4A00812E95 /* NewsDetailHeaderCell.m in Sources */,
 				00EDB783226498110001AE6B /* FBNewsCell.m in Sources */,
 				18130C30226086A400812E95 /* Body.m in Sources */,
+				18D66F03226577EC00CE3F67 /* Theme.m in Sources */,
 				18130C122260319600812E95 /* FormatString.m in Sources */,
 				00EDB763225CD1D60001AE6B /* FormatTime.m in Sources */,
+				18D66F092265808E00CE3F67 /* AppSubLabel.m in Sources */,
 				00EDB728225B48440001AE6B /* AppDelegate.m in Sources */,
 				180B7427225F20C900C4F858 /* NewsDetailViewController.m in Sources */,
 				18130C3A22608C3100812E95 /* BodyTextCell.m in Sources */,
@@ -705,6 +729,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 958P9KJ6VB;
 				INFOPLIST_FILE = DemoBM/Info.plist;
@@ -712,8 +737,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = TodayOKR.DemoBM;
+				PRODUCT_BUNDLE_IDENTIFIER = demoBM123;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -722,6 +748,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 958P9KJ6VB;
 				INFOPLIST_FILE = DemoBM/Info.plist;
@@ -729,8 +756,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = TodayOKR.DemoBM;
+				PRODUCT_BUNDLE_IDENTIFIER = demoBM123;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -14,6 +14,8 @@
 #import <UIKit/UIKit.h>
 #import "News.h"
 #import "FormatTime.h"
+#import "AppDelegate.h"
+#import "Theme.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CustomCell : UITableViewCell {

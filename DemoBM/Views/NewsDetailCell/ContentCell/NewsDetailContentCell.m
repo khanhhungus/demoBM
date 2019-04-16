@@ -24,9 +24,11 @@
         CGFloat widthScreen  = [UIScreen mainScreen].bounds.size.width;
         margin = 15;
         maxWidth = widthScreen - margin*2;
-        self.contentLabel = [[UILabel alloc] initWithFrame: CGRectMake(margin, 0, maxWidth, 100)];
+        AppDelegate *appDelegate = (AppDelegate *) UIApplication.sharedApplication.delegate;
+        Theme *theme = appDelegate.currentTheme;
+        self.contentLabel = AppLabel.new;
         self.contentLabel.numberOfLines = 0;
-        self.contentLabel.textColor = [UIColor blackColor];
+        self.contentLabel.textColor = theme.labelColor;
         self.contentLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:22.0f];
         [self addSubview: self.contentLabel];
     }
