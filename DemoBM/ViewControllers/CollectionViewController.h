@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "CollectionViewCell.h"
-
+#import "FeedSingleImageNewsCell.h"
+#import "FeedFourImageNewsCell.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CollectionViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource>

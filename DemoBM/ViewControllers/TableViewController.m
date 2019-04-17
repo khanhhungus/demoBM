@@ -27,10 +27,12 @@ static NSString *multiImageCellID = @"TableMultiImageCell";
 static NSString *normalNewsCellID = @"CustomCell";
 static NSString *hotNewsCellID = @"HotNewsCell";
 static NSString *fbNewsCellID = @"FBNewsCell";
-
-- (void)dealloc {
-    
+- (IBAction)barBtnTapped:(id)sender {
+    ListNewsViewController *viewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ListNewsViewController"];
+    viewController.listNews = self.arrayNews;
+    [self.navigationController pushViewController:viewController animated:true];
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     constant = [[Constant alloc] init];
@@ -51,7 +53,7 @@ static NSString *fbNewsCellID = @"FBNewsCell";
 
     cellHeightDict = [[NSMutableDictionary alloc] init];
     formatString = [[FormatString alloc] init];
-
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -83,7 +85,6 @@ static NSString *fbNewsCellID = @"FBNewsCell";
         return [self getNormalCell:news :tableView :indexPath];
     }
 }
-
 
 -(UITableViewCell *) getMultiImageCell: (News *) news :(UITableView *) tableView :(NSIndexPath *) indexPath {    
     TableMultiImageCell *cell = (TableMultiImageCell *)[tableView dequeueReusableCellWithIdentifier:multiImageCellID];
@@ -128,14 +129,6 @@ static NSString *fbNewsCellID = @"FBNewsCell";
     [cell fillData:news];
     return cell;
 }
-
-- (void)dataFillSuccess:(NSIndexPath *)indexPath {
-    
-    NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-    [indexPaths addObject: indexPath];
-    [self.tableView reloadRowsAtIndexPaths: indexPaths withRowAnimation:UITableViewRowAnimationFade];
-}
-
 
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
     

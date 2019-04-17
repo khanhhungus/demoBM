@@ -18,12 +18,13 @@
 
 @implementation CollectionViewController
 @synthesize arrayNews;
-NSString * const reuseIdentifier = @"CollectionViewCell";
+NSString * const reuseIdentifier = @"FeedSingleImageNewsCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     _collectionView.delegate = self;
     [_collectionView registerNib: [UINib nibWithNibName: reuseIdentifier bundle:nil]  forCellWithReuseIdentifier: reuseIdentifier];
+    [_collectionView registerClass:[FeedSingleImageNewsCell class] forCellWithReuseIdentifier:reuseIdentifier];
     DataSource *dataSource = [[DataSource alloc] init];
     [dataSource fetchNewsData:^(NSMutableArray * _Nonnull arrayNews, NSError * _Nonnull error) {
         self.arrayNews = arrayNews;
@@ -42,10 +43,10 @@ NSString * const reuseIdentifier = @"CollectionViewCell";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier: @"CollectionViewCell" forIndexPath: indexPath];
-    News *news = arrayNews[indexPath.item];
+    FeedSingleImageNewsCell *cell = (FeedSingleImageNewsCell *)[collectionView dequeueReusableCellWithReuseIdentifier: @"FeedSingleImageNewsCell" forIndexPath: indexPath];
+//    News *news = arrayNews[indexPath.item];
     
-    [cell fillData:news];
+//    [cell fillData:news];
 
     return cell;
 }
