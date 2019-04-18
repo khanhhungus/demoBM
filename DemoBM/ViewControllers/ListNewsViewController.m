@@ -23,6 +23,7 @@
 static NSString *feedSingleImageNewsCellID = @"FeedSingleImageNewsCell";
 static NSString *feedFourImageNewsCellID = @"FeedFourImageNewsCell";
 static NSString *feedArticleNewsCellID = @"FeedArticleNewsCell";
+static NSString *feedDoubleImageNewsCellID = @"FeedDoubleImageNewsCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -42,6 +43,7 @@ static NSString *feedArticleNewsCellID = @"FeedArticleNewsCell";
     [tableView registerClass:[FeedSingleImageNewsCell class] forCellReuseIdentifier: feedSingleImageNewsCellID];
     [tableView registerClass:[FeedFourImageNewsCell class] forCellReuseIdentifier: feedFourImageNewsCellID];
     [tableView registerClass:[FeedArticleNewsCell class] forCellReuseIdentifier: feedArticleNewsCellID];
+    [tableView registerClass:[FeedDoubleImageNewsCell class] forCellReuseIdentifier: feedDoubleImageNewsCellID];
 
     [self.view addSubview:tableView];
 }
@@ -66,15 +68,29 @@ static NSString *feedArticleNewsCellID = @"FeedArticleNewsCell";
 
 -(UITableViewCell *) getTableViewCell: (News *) news :(UITableView *) tableView :(NSIndexPath *) indexPath {
     
-    if (indexPath.section%2 == 0){
+    if (indexPath.section%3 == 0){
         return [self getFeedArticleNewsCell:news :tableView :indexPath];
     }
     
-    if (news.images.count<3) {
-        return [self getFeedSingleImageNewsCell:news :tableView :indexPath];
-    } else {
-        return [self getFeedFourNewsCell:news :tableView :indexPath];
+    switch (news.images.count) {
+        case 0:
+            return [self getFeedSingleImageNewsCell:news :tableView :indexPath];
+        case 1:
+            return [self getFeedSingleImageNewsCell:news :tableView :indexPath];
+        case 2:
+            return [self getFeedDoubleImageNewsCell:news :tableView :indexPath];
+        case 3:
+            return [self getFeedSingleImageNewsCell:news :tableView :indexPath];
+        default:
+            return [self getFeedFourNewsCell:news :tableView :indexPath];
+            break;
     }
+//
+//    if (news.images.count<3) {
+//        return [self getFeedSingleImageNewsCell:news :tableView :indexPath];
+//    } else {
+//        return [self getFeedFourNewsCell:news :tableView :indexPath];
+//    }
 
 }
 
@@ -82,6 +98,17 @@ static NSString *feedArticleNewsCellID = @"FeedArticleNewsCell";
     FeedSingleImageNewsCell *cell = (FeedSingleImageNewsCell *)[tableView dequeueReusableCellWithIdentifier: feedSingleImageNewsCellID forIndexPath: indexPath];
     if (!cell) {
         NSArray *nib = [[NSBundle mainBundle]loadNibNamed:feedSingleImageNewsCellID owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+    }
+    
+    [cell fillData:news];
+    return cell;
+}
+
+-(UITableViewCell *) getFeedDoubleImageNewsCell: (News *) news :(UITableView *) tableView :(NSIndexPath *) indexPath {
+    FeedDoubleImageNewsCell *cell = (FeedDoubleImageNewsCell *)[tableView dequeueReusableCellWithIdentifier: feedDoubleImageNewsCellID forIndexPath: indexPath];
+    if (!cell) {
+        NSArray *nib = [[NSBundle mainBundle]loadNibNamed:feedDoubleImageNewsCellID owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
     
@@ -122,15 +149,23 @@ static NSString *feedArticleNewsCellID = @"FeedArticleNewsCell";
 
 - (float) calculateRowHeight:(NSIndexPath *)indexPath  {
     News *news = self.listNews[indexPath.section];
-    if (indexPath.section % 2 == 0){
+    if (indexPath.section % 3 == 0){
         return [self calculateFeedArticleNewsHeightCell:news];
     }
     
-    if (news.images.count < 3) {
-        return [self calculateFeedSingleImageNewsHeightCell:news];
-    } else {
-        return [self calculateFeedFourImageNewsHeightCell:news];
+    switch (news.images.count) {
+        case 0:
+            return [self calculateFeedSingleImageNewsHeightCell:news];
+        case 1:
+            return [self calculateFeedSingleImageNewsHeightCell:news];
+        case 2:
+            return [self calculateFeedDoubleImageNewsHeightCell:news];
+        case 3:
+            return [self calculateFeedSingleImageNewsHeightCell:news];
+        default:
+            return [self calculateFeedFourImageNewsHeightCell:news];
     }
+
 }
 
 
@@ -155,6 +190,32 @@ static NSString *feedArticleNewsCellID = @"FeedArticleNewsCell";
 
     }
 
+    return cellHeight;
+}
+
+- (float) calculateFeedDoubleImageNewsHeightCell:(News *)news {
+    float cellHeight = 0;
+    NSString *valueCell = [cellHeightDict objectForKey: news.contentID];
+    if (valueCell == nil) {
+        float publisherIconHeight = 35;
+        float heightTitle = [formatString heightForString:news.title font: [constant fontMedium: 16.0f] maxWidth: constant.maxWidth];
+        float heightDescMax = [constant heightForOneLine:[constant fontNormal: 14.0f]] * 3;
+        float heightDescription = [formatString heightForString:news.desc font: [constant fontNormal: 14.0f] maxWidth: constant.maxWidth];
+        if (heightDescription > heightDescMax){
+            heightDescription = heightDescMax;
+        }
+        
+        float widthImage = (constant.maxWidth - constant.spacing)/ 2 ;
+        float heightDoubleImage = widthImage*1.3;
+        float heightForTitleDescView = heightTitle + heightDescription;
+        float heightFooterView = [constant heightForOneLine: [constant fontNormal:14]];
+        cellHeight = heightForTitleDescView + heightFooterView + publisherIconHeight + heightDoubleImage + constant.spacing*4;
+        
+    } else {
+        cellHeight = [valueCell doubleValue];
+        
+    }
+    
     return cellHeight;
 }
 

@@ -34,6 +34,10 @@
 		180472A42268153D00A47C51 /* FeedArticleNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 180472A22268153D00A47C51 /* FeedArticleNewsCell.m */; };
 		180472A52268153D00A47C51 /* FeedArticleNewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180472A32268153D00A47C51 /* FeedArticleNewsCell.xib */; };
 		180472A822682A8100A47C51 /* AppView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180472A722682A8100A47C51 /* AppView.m */; };
+		180472AB2268344A00A47C51 /* PhotoDoubleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180472AA2268344A00A47C51 /* PhotoDoubleView.xib */; };
+		180472AE2268347100A47C51 /* PhotoDoubleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180472AD2268347100A47C51 /* PhotoDoubleView.m */; };
+		180472B32268361500A47C51 /* FeedDoubleImageNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 180472B12268361500A47C51 /* FeedDoubleImageNewsCell.m */; };
+		180472B42268361500A47C51 /* FeedDoubleImageNewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180472B22268361500A47C51 /* FeedDoubleImageNewsCell.xib */; };
 		180B7423225EDD6D00C4F858 /* HotNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 180B7421225EDD6D00C4F858 /* HotNewsCell.m */; };
 		180B7424225EDD6D00C4F858 /* HotNewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180B7422225EDD6D00C4F858 /* HotNewsCell.xib */; };
 		180B7427225F20C900C4F858 /* NewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180B7426225F20C900C4F858 /* NewsDetailViewController.m */; };
@@ -130,6 +134,12 @@
 		180472A32268153D00A47C51 /* FeedArticleNewsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedArticleNewsCell.xib; sourceTree = "<group>"; };
 		180472A622682A8100A47C51 /* AppView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppView.h; sourceTree = "<group>"; };
 		180472A722682A8100A47C51 /* AppView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppView.m; sourceTree = "<group>"; };
+		180472AA2268344A00A47C51 /* PhotoDoubleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoDoubleView.xib; sourceTree = "<group>"; };
+		180472AC2268347100A47C51 /* PhotoDoubleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoDoubleView.h; sourceTree = "<group>"; };
+		180472AD2268347100A47C51 /* PhotoDoubleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoDoubleView.m; sourceTree = "<group>"; };
+		180472B02268361500A47C51 /* FeedDoubleImageNewsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedDoubleImageNewsCell.h; sourceTree = "<group>"; };
+		180472B12268361500A47C51 /* FeedDoubleImageNewsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedDoubleImageNewsCell.m; sourceTree = "<group>"; };
+		180472B22268361500A47C51 /* FeedDoubleImageNewsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedDoubleImageNewsCell.xib; sourceTree = "<group>"; };
 		180B7420225EDD6D00C4F858 /* HotNewsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HotNewsCell.h; sourceTree = "<group>"; };
 		180B7421225EDD6D00C4F858 /* HotNewsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HotNewsCell.m; sourceTree = "<group>"; };
 		180B7422225EDD6D00C4F858 /* HotNewsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HotNewsCell.xib; sourceTree = "<group>"; };
@@ -412,6 +422,26 @@
 			path = FeedArticleNewsCell;
 			sourceTree = "<group>";
 		};
+		180472A92268335500A47C51 /* PhotoDoubleView */ = {
+			isa = PBXGroup;
+			children = (
+				180472AA2268344A00A47C51 /* PhotoDoubleView.xib */,
+				180472AC2268347100A47C51 /* PhotoDoubleView.h */,
+				180472AD2268347100A47C51 /* PhotoDoubleView.m */,
+			);
+			path = PhotoDoubleView;
+			sourceTree = "<group>";
+		};
+		180472AF226835E400A47C51 /* FeedDoubleImageNewsCell */ = {
+			isa = PBXGroup;
+			children = (
+				180472B02268361500A47C51 /* FeedDoubleImageNewsCell.h */,
+				180472B12268361500A47C51 /* FeedDoubleImageNewsCell.m */,
+				180472B22268361500A47C51 /* FeedDoubleImageNewsCell.xib */,
+			);
+			path = FeedDoubleImageNewsCell;
+			sourceTree = "<group>";
+		};
 		180B741F225EDD1D00C4F858 /* HotNewsCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -527,6 +557,7 @@
 		18FE18AE2266C491005210AF /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				180472AF226835E400A47C51 /* FeedDoubleImageNewsCell */,
 				180472A02268144E00A47C51 /* FeedArticleNewsCell */,
 				18047294226733B900A47C51 /* FeedFourImageNewsCell */,
 				18FE18CE2266DF5E005210AF /* FeedSingleImageNewsCell */,
@@ -542,6 +573,7 @@
 		18FE18AF2266C4A0005210AF /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				180472A92268335500A47C51 /* PhotoDoubleView */,
 				1804729A22674A9200A47C51 /* ArticleView */,
 				1804728E22671B3900A47C51 /* PhotoFourView */,
 				18FE18D422671338005210AF /* FooterNewsView */,
@@ -682,6 +714,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				180472AB2268344A00A47C51 /* PhotoDoubleView.xib in Resources */,
 				18E72B1B225DDFCB00500D01 /* TableMultiImageCell.xib in Resources */,
 				18130C1E2260479500812E95 /* NewsDetailDescriptionCell.xib in Resources */,
 				18130C2D22604F0B00812E95 /* NewsDetailContentCell.xib in Resources */,
@@ -704,6 +737,7 @@
 				180B7424225EDD6D00C4F858 /* HotNewsCell.xib in Resources */,
 				18130C4022608C4200812E95 /* BodyImageCell.xib in Resources */,
 				180472A52268153D00A47C51 /* FeedArticleNewsCell.xib in Resources */,
+				180472B42268361500A47C51 /* FeedDoubleImageNewsCell.xib in Resources */,
 				00EDB771225CD6D10001AE6B /* CollectionViewCell.xib in Resources */,
 				18130C3B22608C3100812E95 /* BodyTextCell.xib in Resources */,
 			);
@@ -728,6 +762,7 @@
 				18E72B1E225DFE1800500D01 /* Image.m in Sources */,
 				180472A822682A8100A47C51 /* AppView.m in Sources */,
 				180472A42268153D00A47C51 /* FeedArticleNewsCell.m in Sources */,
+				180472B32268361500A47C51 /* FeedDoubleImageNewsCell.m in Sources */,
 				18130C1D2260479500812E95 /* NewsDetailDescriptionCell.m in Sources */,
 				18FE18C52266D634005210AF /* TitleDescriptionView.m in Sources */,
 				18FE18D22266DF74005210AF /* FeedSingleImageNewsCell.m in Sources */,
@@ -743,6 +778,7 @@
 				00EDB770225CD6D10001AE6B /* CollectionViewCell.m in Sources */,
 				18D66F0622657E5300CE3F67 /* AppLabel.m in Sources */,
 				00EDB75B225CBB4E0001AE6B /* DataSource.m in Sources */,
+				180472AE2268347100A47C51 /* PhotoDoubleView.m in Sources */,
 				18FE25A52265CF890089D370 /* UILabel+common.m in Sources */,
 				00EDB736225B48460001AE6B /* main.m in Sources */,
 				1804729F22674B2C00A47C51 /* ArticleView.m in Sources */,
