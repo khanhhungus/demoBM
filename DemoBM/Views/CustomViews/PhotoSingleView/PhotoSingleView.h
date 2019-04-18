@@ -13,6 +13,7 @@
 #import "News.h"
 #import "AppView.h"
 #import <SDWebImage/SDWebImage.h>
+#import "NewsDetailViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -71,6 +71,36 @@
             </objects>
             <point key="canvasLocation" x="35" y="732"/>
         </scene>
+        <!--Container Page View Controller-->
+        <scene sceneID="zvy-9q-uqf">
+            <objects>
+                <viewController storyboardIdentifier="ContainerPageViewController" id="3vd-m3-fqE" customClass="ContainerPageViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Q1I-Nf-ZNT">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="JAR-6V-bPH"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VMK-4u-XtG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1004" y="741"/>
+        </scene>
+        <!--Image Page View Controller-->
+        <scene sceneID="E0S-kC-Din">
+            <objects>
+                <viewController storyboardIdentifier="ImagePageViewController" id="L0H-RA-Zgu" customClass="ImagePageViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pbb-xZ-Wym">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="MiK-La-6vQ"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aR8-pq-PHw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1745" y="732"/>
+        </scene>
         <!--Collection View Controller-->
         <scene sceneID="tqx-oB-uaS">
             <objects>

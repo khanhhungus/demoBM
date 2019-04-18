@@ -29,6 +29,12 @@
     self.thumbnailImageView.clipsToBounds = true;
     self.thumbnailImageView.contentMode = UIViewContentModeScaleAspectFill;
     [self addSubview: self.thumbnailImageView];
+    
+//    NewsDetailViewController *viewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"NewsDetailViewController"];
+//    viewController.view.backgroundColor = UIColor.redColor;
+//    [viewController.view setFrame:CGRectMake(0, 0, constant.maxWidth, heightLargeItem)];
+//    [self addSubview: viewController.view];
+    
 }
 
 - (void)fillData:(News *)news {

@@ -65,6 +65,8 @@
 		18130C3B22608C3100812E95 /* BodyTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18130C3922608C3100812E95 /* BodyTextCell.xib */; };
 		18130C3F22608C4200812E95 /* BodyImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18130C3D22608C4200812E95 /* BodyImageCell.m */; };
 		18130C4022608C4200812E95 /* BodyImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18130C3E22608C4200812E95 /* BodyImageCell.xib */; };
+		18D6047C226898060017BEEB /* ImagePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D6047B226898060017BEEB /* ImagePageViewController.m */; };
+		18D60480226898450017BEEB /* ContainerPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D6047F226898450017BEEB /* ContainerPageViewController.m */; };
 		18D66F03226577EC00CE3F67 /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D66F02226577EC00CE3F67 /* Theme.m */; };
 		18D66F0622657E5300CE3F67 /* AppLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D66F0522657E5300CE3F67 /* AppLabel.m */; };
 		18D66F092265808E00CE3F67 /* AppSubLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D66F082265808E00CE3F67 /* AppSubLabel.m */; };
@@ -193,6 +195,10 @@
 		18130C3C22608C4200812E95 /* BodyImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BodyImageCell.h; sourceTree = "<group>"; };
 		18130C3D22608C4200812E95 /* BodyImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BodyImageCell.m; sourceTree = "<group>"; };
 		18130C3E22608C4200812E95 /* BodyImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BodyImageCell.xib; sourceTree = "<group>"; };
+		18D6047A226898060017BEEB /* ImagePageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImagePageViewController.h; sourceTree = "<group>"; };
+		18D6047B226898060017BEEB /* ImagePageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImagePageViewController.m; sourceTree = "<group>"; };
+		18D6047E226898450017BEEB /* ContainerPageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContainerPageViewController.h; sourceTree = "<group>"; };
+		18D6047F226898450017BEEB /* ContainerPageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContainerPageViewController.m; sourceTree = "<group>"; };
 		18D66F01226577EC00CE3F67 /* Theme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Theme.h; sourceTree = "<group>"; };
 		18D66F02226577EC00CE3F67 /* Theme.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Theme.m; sourceTree = "<group>"; };
 		18D66F0422657E5300CE3F67 /* AppLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppLabel.h; sourceTree = "<group>"; };
@@ -299,6 +305,8 @@
 		00EDB75C225CCCEF0001AE6B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				18D6047D226898230017BEEB /* ContainerPageViewController */,
+				18D60479226897DD0017BEEB /* ImagePageViewController */,
 				00EDB729225B48440001AE6B /* TableViewController.h */,
 				00EDB72A225B48440001AE6B /* TableViewController.m */,
 				00EDB766225CD6080001AE6B /* CollectionViewController.h */,
@@ -616,6 +624,24 @@
 			path = BodyImageCell;
 			sourceTree = "<group>";
 		};
+		18D60479226897DD0017BEEB /* ImagePageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				18D6047A226898060017BEEB /* ImagePageViewController.h */,
+				18D6047B226898060017BEEB /* ImagePageViewController.m */,
+			);
+			path = ImagePageViewController;
+			sourceTree = "<group>";
+		};
+		18D6047D226898230017BEEB /* ContainerPageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				18D6047E226898450017BEEB /* ContainerPageViewController.h */,
+				18D6047F226898450017BEEB /* ContainerPageViewController.m */,
+			);
+			path = ContainerPageViewController;
+			sourceTree = "<group>";
+		};
 		18E72B13225DD38C00500D01 /* MultiImageCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -718,7 +744,6 @@
 				833C08E1537C13C548FA543D /* Pods-DemoBMTests.debug.xcconfig */,
 				1FF0D15E6580CF88619FE435 /* Pods-DemoBMTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -923,6 +948,7 @@
 				180B7423225EDD6D00C4F858 /* HotNewsCell.m in Sources */,
 				00EDB78722649E530001AE6B /* Constant.m in Sources */,
 				18130C2622604C7000812E95 /* NewsDetailThumbnailCell.m in Sources */,
+				18D60480226898450017BEEB /* ContainerPageViewController.m in Sources */,
 				1804729322671B9600A47C51 /* PhotoFourView.m in Sources */,
 				18130C2C22604F0B00812E95 /* NewsDetailContentCell.m in Sources */,
 				00EDB72B225B48440001AE6B /* TableViewController.m in Sources */,
@@ -944,6 +970,7 @@
 				18FE18BF2266CDA3005210AF /* HeaderPublisherView.m in Sources */,
 				00EDB763225CD1D60001AE6B /* FormatTime.m in Sources */,
 				18D66F092265808E00CE3F67 /* AppSubLabel.m in Sources */,
+				18D6047C226898060017BEEB /* ImagePageViewController.m in Sources */,
 				180472CB226869AA00A47C51 /* FeedFiveImageNewsCell.m in Sources */,
 				18047298226733F300A47C51 /* FeedFourImageNewsCell.m in Sources */,
 				00EDB728225B48440001AE6B /* AppDelegate.m in Sources */,

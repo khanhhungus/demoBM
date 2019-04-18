@@ -14,6 +14,7 @@
 #import "FooterNewsView.h"
 #import "PhotoFourView.h"
 #import "News.h"
+#import "ContainerPageViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

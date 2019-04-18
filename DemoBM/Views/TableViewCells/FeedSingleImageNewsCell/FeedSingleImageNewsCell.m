@@ -44,6 +44,14 @@
 
         photoSingleView = [[NSBundle.mainBundle loadNibNamed:@"PhotoSingleView" owner:self options:nil] objectAtIndex:0];
         [self addSubview: photoSingleView];
+        
+        
+        ContainerPageViewController *viewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ContainerPageViewController"];
+        viewController.view.backgroundColor = UIColor.redColor;
+        [viewController.view setFrame:CGRectMake(0, 0, constant.maxWidth, 100)];
+        [self addSubview: viewController.view];
+
+    
     }
     return self;
 }
