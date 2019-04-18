@@ -13,13 +13,14 @@
 #import "Constant.h"
 #import "News.h"
 #import "FormatTime.h"
+#import "AppView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HeaderPublisherView : UIView
+@interface HeaderPublisherView : AppView
 @property (strong, nonatomic) UIImageView *publisherImageView;
 @property (strong, nonatomic) AppLabel *publisherLabel;
-@property (strong, nonatomic) UILabel *timeLabel;
+@property (strong, nonatomic) AppLabel *timeLabel;
 
 -(void) fillData:(News *)news;
 @end

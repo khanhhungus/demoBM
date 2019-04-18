@@ -12,10 +12,11 @@
 #import "Constant.h"
 #import "FormatString.h"
 #import "News.h"
+#import "AppView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FooterNewsView : UIView
+@interface FooterNewsView : AppView
 @property (strong, nonatomic) UILabel *totalCmtLabel;
 -(void)fillData:(News *)news;
 @end

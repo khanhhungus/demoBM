@@ -23,6 +23,7 @@
 -(void) initLayout {
     AppDelegate *appDelegate = (AppDelegate *) UIApplication.sharedApplication.delegate;
     Theme *theme = appDelegate.currentTheme;
+    self.backgroundColor = theme.backgroundColor;
     constant = Constant.new;
     self.publisherImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
     self.publisherImageView.image = [UIImage imageNamed: @"grayBackground.png"];
@@ -35,9 +36,9 @@
     self.publisherLabel.font = [constant fontMedium:16.0f];
     [self addSubview: self.publisherLabel];
     
-    self.timeLabel = [[UILabel alloc] initWithFrame: CGRectMake(xPublisherLabel,18, constant.maxWidth - xPublisherLabel, 18)];
+    self.timeLabel = [[AppLabel alloc] initWithFrame: CGRectMake(xPublisherLabel,18, constant.maxWidth - xPublisherLabel, 18)];
     self.timeLabel.numberOfLines = 1;
-    self.timeLabel.textColor = [UIColor grayColor];
+    self.timeLabel.textColor = theme.secondaryLabelColor;
     self.timeLabel.font = [constant fontNormal:12.0f];
     [self addSubview: self.timeLabel];
 }

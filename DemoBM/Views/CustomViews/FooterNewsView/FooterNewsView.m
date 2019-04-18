@@ -27,10 +27,12 @@
     constant = Constant.new;
     AppDelegate *appDelegate = (AppDelegate *) UIApplication.sharedApplication.delegate;
     Theme *theme = appDelegate.currentTheme;
+    self.backgroundColor = theme.backgroundColor;
+
     float heightOneLine = [constant heightForOneLine: [constant fontNormal:14]];
     self.totalCmtLabel = [[UILabel alloc] initWithFrame:CGRectMake(constant.margin, 0, constant.maxWidth, heightOneLine)];
     self.totalCmtLabel.font = [constant fontNormal:14.0f];
-    self.totalCmtLabel.textColor = [UIColor lightGrayColor];
+    self.totalCmtLabel.textColor = theme.secondaryLabelColor;
     [self addSubview: self.totalCmtLabel];
 }
 

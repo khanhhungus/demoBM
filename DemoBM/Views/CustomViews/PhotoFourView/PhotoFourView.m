@@ -23,6 +23,9 @@
 
 -(void) initLayout {
     constant = Constant.new;
+    AppDelegate *appDelegate = (AppDelegate *) UIApplication.sharedApplication.delegate;
+    Theme *theme = appDelegate.currentTheme;
+    self.backgroundColor = theme.backgroundColor;
     float widthItem = (constant.maxWidth - constant.spacing*2)/ 3 ;
     self.mainImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, constant.maxWidth, 190)];
     self.mainImageView.image = [UIImage imageNamed: @"grayBackground.png"];

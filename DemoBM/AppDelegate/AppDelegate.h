@@ -10,6 +10,7 @@
 #import "Theme.h"
 #import "AppLabel.h"
 #import "AppSubLabel.h"
+#import "AppView.h"
 
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

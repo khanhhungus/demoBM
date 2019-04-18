@@ -11,10 +11,11 @@
 #import "AppDelegate.h"
 #import "Constant.h"
 #import "News.h"
+#import "AppView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PhotoSingleView : UIView
+@interface PhotoSingleView : AppView
 @property (strong, nonatomic) UIImageView *thumbnailImageView;
 -(void)fillData:(News *)news;
 @end

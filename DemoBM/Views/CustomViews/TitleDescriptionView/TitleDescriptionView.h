@@ -13,10 +13,11 @@
 #import "Constant.h"
 #import "FormatString.h"
 #import "News.h"
+#import "AppView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TitleDescriptionView : UIView
+@interface TitleDescriptionView : AppView
 @property (strong, nonatomic) AppLabel *titleLabel;
 @property (strong, nonatomic) AppLabel *descriptionLabel;
 - (void) fillData:(News *)news;

@@ -64,7 +64,7 @@
     
     [UITableView.appearance setBackgroundColor: _currentTheme.backgroundColor];
     [UITableViewCell.appearance setBackgroundColor: _currentTheme.backgroundColor];
-
+    [AppView.appearance setBackgroundColor:_currentTheme.backgroundColor];
     [AppLabel.appearance customColor:_currentTheme.labelColor];
     [AppSubLabel.appearance setTextColor:_currentTheme.secondaryLabelColor];
     [UINavigationBar.appearance setBarStyle:_currentTheme.barStyle];

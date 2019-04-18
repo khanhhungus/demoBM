@@ -23,6 +23,7 @@
 
 - (void) initLayout {
     constant = Constant.new;
+    
     self.thumbnailImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, constant.maxWidth, 190)];
     self.thumbnailImageView.image = [UIImage imageNamed: @"grayBackground.png"];
     self.thumbnailImageView.layer.cornerRadius = 5.0;

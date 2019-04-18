@@ -7,11 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Theme.h"
+#import "AppDelegate.h"
+#import "Constant.h"
+#import "FormatString.h"
+#import "News.h"
+#import "FormatTime.h"
+#import "AppView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ArticleView : UIView
-
+@interface ArticleView : AppView
+@property (strong, nonatomic) AppLabel *titleLabel;
+@property (strong, nonatomic) AppLabel *moreInforLabel;
+@property (strong, nonatomic) UIImageView *thumbnailImageView;
+-(void) fillData:(News *) news;
 @end
 
 NS_ASSUME_NONNULL_END

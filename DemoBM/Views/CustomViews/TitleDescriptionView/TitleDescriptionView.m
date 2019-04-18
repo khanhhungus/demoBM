@@ -27,7 +27,8 @@
     constant = Constant.new;
     AppDelegate *appDelegate = (AppDelegate *) UIApplication.sharedApplication.delegate;
     Theme *theme = appDelegate.currentTheme;
-    
+    self.backgroundColor = theme.backgroundColor;
+
     self.titleLabel = [[AppLabel alloc] initWithFrame: CGRectMake(0, 0, viewRect.size.width, 10)];
     self.titleLabel.textColor = theme.labelColor;
     self.titleLabel.numberOfLines = 3;

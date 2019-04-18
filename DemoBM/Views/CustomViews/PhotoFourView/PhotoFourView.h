@@ -11,10 +11,11 @@
 #import "AppDelegate.h"
 #import "Constant.h"
 #import "News.h"
+#import "AppView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PhotoFourView : UIView
+@interface PhotoFourView : AppView
 @property (strong, nonatomic) UIImageView *mainImageView;
 @property (strong, nonatomic) UIImageView *leftImageView;
 @property (strong, nonatomic) UIImageView *centerImageView;
