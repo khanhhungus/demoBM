@@ -25,7 +25,7 @@ static NSString *feedFourImageNewsCellID = @"FeedFourImageNewsCell";
 static NSString *feedArticleNewsCellID = @"FeedArticleNewsCell";
 static NSString *feedDoubleImageNewsCellID = @"FeedDoubleImageNewsCell";
 static NSString *feedTripleImageNewsCellID = @"FeedTripleImageNewsCell";
-
+static NSString *feedFiveImageNewsCellID = @"FeedFiveImageNewsCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -45,6 +45,7 @@ static NSString *feedTripleImageNewsCellID = @"FeedTripleImageNewsCell";
     [tableView registerClass:[FeedArticleNewsCell class] forCellReuseIdentifier: feedArticleNewsCellID];
     [tableView registerClass:[FeedDoubleImageNewsCell class] forCellReuseIdentifier: feedDoubleImageNewsCellID];
     [tableView registerClass:[FeedTripleImageNewsCell class] forCellReuseIdentifier: feedTripleImageNewsCellID];
+    [tableView registerClass:[FeedFiveImageNewsCell class] forCellReuseIdentifier: feedFiveImageNewsCellID];
 
     [self.view addSubview:tableView];
 }
@@ -82,8 +83,10 @@ static NSString *feedTripleImageNewsCellID = @"FeedTripleImageNewsCell";
             return [self getFeedDoubleImageNewsCell:news :tableView :indexPath];
         case 3:
             return [self getFeedTripleImageNewsCell:news :tableView :indexPath];
-        default:
+        case 4:
             return [self getFeedFourNewsCell:news :tableView :indexPath];
+        default:
+            return [self getFeedFiveNewsCell:news :tableView :indexPath];
             break;
     }
 
@@ -115,6 +118,17 @@ static NSString *feedTripleImageNewsCellID = @"FeedTripleImageNewsCell";
     FeedFourImageNewsCell *cell = (FeedFourImageNewsCell *)[tableView dequeueReusableCellWithIdentifier: feedFourImageNewsCellID forIndexPath: indexPath];
     if (!cell) {
         NSArray *nib = [[NSBundle mainBundle]loadNibNamed:feedFourImageNewsCellID owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+    }
+    
+    [cell fillData:news];
+    return cell;
+}
+
+-(UITableViewCell *) getFeedFiveNewsCell: (News *) news :(UITableView *) tableView :(NSIndexPath *) indexPath {
+    FeedFiveImageNewsCell *cell = (FeedFiveImageNewsCell *)[tableView dequeueReusableCellWithIdentifier: feedFiveImageNewsCellID forIndexPath: indexPath];
+    if (!cell) {
+        NSArray *nib = [[NSBundle mainBundle]loadNibNamed:feedFiveImageNewsCellID owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
     
@@ -186,7 +200,7 @@ static NSString *feedTripleImageNewsCellID = @"FeedTripleImageNewsCell";
         if (heightDescription > heightDescMax){
             heightDescription = heightDescMax;
         }
-        float heightSingleImage = 190;
+        float heightSingleImage = constant.maxWidth*0.6;
         float heightForTitleDescView = heightTitle + heightDescription;
         float heightFooterView = [constant heightForOneLine: [constant fontNormal:14]];
         cellHeight = heightForTitleDescView + heightFooterView + publisherIconHeight + heightSingleImage + constant.spacing*4;
@@ -236,11 +250,13 @@ static NSString *feedTripleImageNewsCellID = @"FeedTripleImageNewsCell";
             heightDescription = heightDescMax;
         }
         
-        float widthImage = (constant.maxWidth - constant.spacing)/ 2 ;
-        float heightDoubleImage = widthImage*1.3;
+        float widthItem = (constant.maxWidth - constant.spacing)/ 2 ;
+        float heightLargeItem = constant.maxWidth*0.7;
+        float heightSmallItem = widthItem*1.3;
+        float heightImages = heightLargeItem + heightSmallItem;
         float heightForTitleDescView = heightTitle + heightDescription;
         float heightFooterView = [constant heightForOneLine: [constant fontNormal:14]];
-        cellHeight = heightForTitleDescView + heightFooterView + publisherIconHeight + heightDoubleImage*2 + constant.spacing*4;
+        cellHeight = heightForTitleDescView + heightFooterView + publisherIconHeight + heightImages + constant.spacing*4;
         
     } else {
         cellHeight = [valueCell doubleValue];
@@ -260,9 +276,37 @@ static NSString *feedTripleImageNewsCellID = @"FeedTripleImageNewsCell";
         if (heightDescription > heightDescMax){
             heightDescription = heightDescMax;
         }
+        float heightLargeImage = constant.maxWidth*0.6;
+        float heightSmallImage = (constant.maxWidth - constant.spacing*2)/ 3 ;
+        float heightImages = heightLargeImage + heightSmallImage + constant.spacing;
         
-        float widthItem = (constant.maxWidth - constant.spacing*2)/ 3 ;
-        float heightImages = 190 + widthItem + constant.spacing;
+        float heightForTitleDescView = heightTitle + heightDescription;
+        float heightFooterView = [constant heightForOneLine: [constant fontNormal:14]];
+        
+        cellHeight = heightForTitleDescView + heightFooterView + publisherIconHeight + heightImages + constant.spacing*4;
+        NSNumber *doubleValue = [[NSNumber alloc] initWithFloat:cellHeight];
+        [cellHeightDict setValue: doubleValue forKey: news.contentID];
+    } else {
+        cellHeight = [valueCell doubleValue];
+    }
+    return cellHeight;
+}
+
+- (float) calculateFeedFiveImageNewsHeightCell:(News *)news {
+    float cellHeight = 0;
+    NSString *valueCell = [cellHeightDict objectForKey: news.contentID];
+    if (valueCell == nil) {
+        float publisherIconHeight = 35;
+        float heightTitle = [formatString heightForString:news.title font: [constant fontMedium: 16.0f] maxWidth: constant.maxWidth];
+        float heightDescMax = [constant heightForOneLine:[constant fontNormal: 14.0f]] * 3;
+        float heightDescription = [formatString heightForString:news.desc font: [constant fontNormal: 14.0f] maxWidth: constant.maxWidth];
+        if (heightDescription > heightDescMax){
+            heightDescription = heightDescMax;
+        }
+        float heightLargeItem = (constant.maxWidth - constant.spacing)/ 2 ;
+
+        float heightItem = (constant.maxWidth - constant.spacing*2)/ 3 ;
+        float heightImages = heightLargeItem + heightItem + constant.spacing;
         
         float heightForTitleDescView = heightTitle + heightDescription;
         float heightFooterView = [constant heightForOneLine: [constant fontNormal:14]];

@@ -30,7 +30,7 @@
     float heightItem = widthItem*1.3;
     
     self.leftImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, widthItem, heightItem)];
-    self.leftImageView.image = [UIImage imageNamed: @"grayBackground.png"];
+//    self.leftImageView.image = [UIImage imageNamed: @"grayBackground.png"];
     self.leftImageView.layer.cornerRadius = 5.0;
     self.leftImageView.clipsToBounds = true;
     self.leftImageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -39,7 +39,7 @@
     float xRightImage = widthItem + constant.spacing;
     
     self.rightImageView = [[UIImageView alloc] initWithFrame:CGRectMake(xRightImage, 0, widthItem, heightItem)];
-    self.rightImageView.image = [UIImage imageNamed: @"grayBackground.png"];
+//    self.rightImageView.image = [UIImage imageNamed: @"grayBackground.png"];
     self.rightImageView.layer.cornerRadius = 5.0;
     self.rightImageView.clipsToBounds = true;
     self.rightImageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -49,24 +49,8 @@
 
 }
 - (void) fillData: (News*) news {
-    dispatch_async(dispatch_get_global_queue(0,0), ^{
-        NSData *leftImageData;
-        NSData * rightImageData;
-        if (news.images[0].url != nil) {
-            leftImageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: news.images[0].url]];
-        }
-        if (news.images[1].url != nil) {
-            rightImageData =  [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: news.images[1].url]];
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (leftImageData) {
-                self.leftImageView.image = [[UIImage alloc] initWithData:leftImageData];
-            }
-            if (rightImageData) {
-                self.rightImageView.image = [[UIImage alloc] initWithData:rightImageData];
-            }
-        });        
-    });
+    [self.leftImageView sd_setImageWithURL:[NSURL URLWithString:news.avatarURL] placeholderImage:[UIImage imageNamed:@"grayBackground.png"]];
+    [self.rightImageView sd_setImageWithURL:[NSURL URLWithString:news.images[0].url] placeholderImage:[UIImage imageNamed:@"grayBackground.png"]];
 }
 
 

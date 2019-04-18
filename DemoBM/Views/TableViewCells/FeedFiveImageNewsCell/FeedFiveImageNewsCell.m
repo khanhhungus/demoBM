@@ -1,18 +1,17 @@
 //
-//  FeedNewsCell.m
+//  FeedFiveImageNewsCell.m
 //  DemoBM
 //
-//  Created by CPU11738 on 4/17/19.
+//  Created by CPU11738 on 4/18/19.
 //  Copyright © 2019 Khanh Hung Nguyen. All rights reserved.
 //
 
-#import "FeedSingleImageNewsCell.h"
+#import "FeedFiveImageNewsCell.h"
 
-@implementation FeedSingleImageNewsCell {
+@implementation FeedFiveImageNewsCell {
     HeaderPublisherView *headerView;
     TitleDescriptionView *titleView;
-    PhotoSingleView *photoSingleView;
-    PhotoFourView *photoFourView;
+    PhotoFiveView *photoFiveView;
     FooterNewsView *footerView;
     Constant *constant;
     FormatString *formatString;
@@ -22,7 +21,6 @@
     [super awakeFromNib];
     
 }
-
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     
@@ -38,15 +36,16 @@
         titleView = [[NSBundle.mainBundle loadNibNamed:@"TitleDescriptionView" owner:self options:nil] objectAtIndex:0] ;
         [titleView setFrame:CGRectMake(constant.margin, 40, constant.maxWidth, 50)];
         [self addSubview: titleView];
-
+        
         footerView = [[NSBundle.mainBundle loadNibNamed:@"FooterNewsView" owner:self options:nil] objectAtIndex:0];
         [self addSubview:footerView];
-
-        photoSingleView = [[NSBundle.mainBundle loadNibNamed:@"PhotoSingleView" owner:self options:nil] objectAtIndex:0];
-        [self addSubview: photoSingleView];
+        
+        photoFiveView = [[NSBundle.mainBundle loadNibNamed:@"PhotoFourView" owner:self options:nil] objectAtIndex:0];
+        [self addSubview: photoFiveView];
     }
     return self;
 }
+
 
 -(void) fillData:(News *)news {
     
@@ -61,12 +60,10 @@
     [titleView setFrame:CGRectMake(constant.margin, 45, constant.maxWidth, heightForTitleDescView)];
     
     float yPhotoView = heightForTitleDescView + 45 + constant.spacing;
-    float yFooterView = yPhotoView + constant.spacing + constant.maxWidth*0.6;
-    
-    [photoSingleView setFrame:CGRectMake(constant.margin, yPhotoView,constant.maxWidth, constant.maxWidth*0.6)];
-    [photoSingleView fillData:news];
-    
-
+    float yFooterView = yPhotoView + constant.spacing + photoFiveView.heightView;
+    [self addSubview: photoFiveView];
+    [photoFiveView setFrame:CGRectMake(constant.margin, yPhotoView,constant.maxWidth, photoFiveView.heightView)];
+    [photoFiveView fillData:news];
     float heightOneLine = [constant heightForOneLine:[constant fontNormal:14]];
     [footerView setFrame:CGRectMake(constant.margin, yFooterView, constant.maxWidth, heightOneLine)];
     [headerView fillData:news];

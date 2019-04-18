@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "Constant.h"
 #import "News.h"
+#import <SDWebImage/SDWebImage.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

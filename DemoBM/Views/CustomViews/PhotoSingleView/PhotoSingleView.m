@@ -23,9 +23,8 @@
 
 - (void) initLayout {
     constant = Constant.new;
-    
-    self.thumbnailImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, constant.maxWidth, 190)];
-    self.thumbnailImageView.image = [UIImage imageNamed: @"grayBackground.png"];
+    float heightLargeItem = constant.maxWidth*0.6;
+    self.thumbnailImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, constant.maxWidth, heightLargeItem)];
     self.thumbnailImageView.layer.cornerRadius = 5.0;
     self.thumbnailImageView.clipsToBounds = true;
     self.thumbnailImageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -33,13 +32,6 @@
 }
 
 - (void)fillData:(News *)news {
-    dispatch_async(dispatch_get_global_queue(0,0), ^{
-        NSData * thumbnailData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: news.avatarURL]];
-        if ( thumbnailData == nil )
-            return;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.thumbnailImageView.image = [[UIImage alloc] initWithData: thumbnailData];
-        });
-    });
+    [self.thumbnailImageView sd_setImageWithURL:[NSURL URLWithString:news.avatarURL] placeholderImage:[UIImage imageNamed:@"grayBackground.png"]];
 }
 @end

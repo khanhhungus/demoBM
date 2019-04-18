@@ -16,6 +16,7 @@
 #import "FeedArticleNewsCell.h"
 #import "FeedDoubleImageNewsCell.h"
 #import "FeedTripleImageNewsCell.h"
+#import "FeedFiveImageNewsCell.h"
 #import "FormatString.h"
 
 NS_ASSUME_NONNULL_BEGIN

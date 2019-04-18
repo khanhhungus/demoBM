@@ -12,6 +12,7 @@
 #import "Constant.h"
 #import "News.h"
 #import "AppView.h"
+#import <SDWebImage/SDWebImage.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

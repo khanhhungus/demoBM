@@ -12,6 +12,8 @@
 #import "Constant.h"
 #import "News.h"
 #import "AppView.h"
+#import <SDWebImage/SDWebImage.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) UIImageView *leftImageView;
 @property (strong, nonatomic) UIImageView *centerImageView;
 @property (strong, nonatomic) UIImageView *rightImageView;
-@property (strong, nonatomic) UILabel *numberOfPhotoNotShow;
+
 @property float heightView;
 -(void)fillData:(News *)news;
 
