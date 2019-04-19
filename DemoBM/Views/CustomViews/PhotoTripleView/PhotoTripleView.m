@@ -29,7 +29,7 @@
     
     float widthItem = (constant.maxWidth - constant.spacing)/ 2 ;
     float heightLargeItem = constant.maxWidth*0.7;
-    float heightItem = widthItem*1.3;
+    float heightItem = widthItem;
     self.mainImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, constant.maxWidth, heightLargeItem)];
     self.mainImageView.layer.cornerRadius = 5.0;
     self.mainImageView.clipsToBounds = true;

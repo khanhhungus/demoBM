@@ -29,15 +29,15 @@
     self.thumbnailImageView.clipsToBounds = true;
     self.thumbnailImageView.contentMode = UIViewContentModeScaleAspectFill;
     [self addSubview: self.thumbnailImageView];
-    
-//    NewsDetailViewController *viewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"NewsDetailViewController"];
-//    viewController.view.backgroundColor = UIColor.redColor;
-//    [viewController.view setFrame:CGRectMake(0, 0, constant.maxWidth, heightLargeItem)];
-//    [self addSubview: viewController.view];
-    
 }
 
 - (void)fillData:(News *)news {
     [self.thumbnailImageView sd_setImageWithURL:[NSURL URLWithString:news.avatarURL] placeholderImage:[UIImage imageNamed:@"grayBackground.png"]];
+    
+    float ratio = news.avatarHeight / news.avatarWidth ;
+    float heightLargeItem = constant.maxWidth*ratio;
+//    [self.thumbnailImageView setFrame:CGRectMake(0, 0, constant.maxWidth, heightLargeItem)];
+    
+//    [self setNeedsLayout];
 }
 @end

@@ -51,7 +51,8 @@
 }
 
 -(void) fillData:(News *)news {
-    
+    [headerView setFrame:CGRectMake(constant.margin, 0, constant.maxWidth, 35)];
+
     float heightTitle = [formatString heightForString:news.title font: [constant fontMedium: 16.0f] maxWidth: constant.maxWidth];
     float heightDescMax = [constant heightForOneLine:[constant fontNormal: 14.0f]] * 3;
     float heightDescription = [formatString heightForString:news.desc font: [constant fontNormal: 14.0f] maxWidth: constant.maxWidth];
@@ -63,11 +64,13 @@
     [titleView setFrame:CGRectMake(constant.margin, 45, constant.maxWidth, heightForTitleDescView)];
     
     float yPhotoView = heightForTitleDescView + 45 + constant.spacing;
-    float yFooterView = yPhotoView + constant.spacing + constant.maxWidth*0.6;
-    
-    [photoSingleView setFrame:CGRectMake(constant.margin, yPhotoView,constant.maxWidth, constant.maxWidth*0.6)];
+    float ratio = news.avatarHeight / news.avatarWidth ;
+    float heightPhoto = constant.maxWidth * ratio;
+    float yFooterView = yPhotoView + constant.spacing + heightPhoto;
+
+    [photoSingleView.thumbnailImageView setFrame:CGRectMake(0, 0, constant.maxWidth, heightPhoto)];
+    [photoSingleView setFrame:CGRectMake(constant.margin, yPhotoView,constant.maxWidth, heightPhoto)];
     [photoSingleView fillData:news];
-    
 
     float heightOneLine = [constant heightForOneLine:[constant fontNormal:14]];
     [footerView setFrame:CGRectMake(constant.margin, yFooterView, constant.maxWidth, heightOneLine)];

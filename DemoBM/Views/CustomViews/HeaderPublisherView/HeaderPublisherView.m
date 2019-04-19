@@ -36,7 +36,7 @@
     self.publisherLabel.font = [constant fontMedium:16.0f];
     [self addSubview: self.publisherLabel];
     
-    self.timeLabel = [[AppLabel alloc] initWithFrame: CGRectMake(xPublisherLabel,18, constant.maxWidth - xPublisherLabel, 18)];
+    self.timeLabel = [[AppLabel alloc] initWithFrame: CGRectMake(xPublisherLabel,18, constant.maxWidth - xPublisherLabel, 15)];
     self.timeLabel.numberOfLines = 1;
     self.timeLabel.textColor = theme.secondaryLabelColor;
     self.timeLabel.font = [constant fontNormal:12.0f];

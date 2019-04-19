@@ -19,7 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void) fillData:(News *)news ;
 @property float heightView;
-    
+//@property (assign, nonatomic) float heightView;
+
 
 @end
 

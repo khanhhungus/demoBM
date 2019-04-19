@@ -79,6 +79,8 @@
     NSString *publisher = newsDict[@"publisherName"];
     NSString *totalComments = newsDict[@"totalComments"];
     NSString *avatarURL = newsDict[@"avatarUrl"];
+    int avatarWidth = (int) newsDict[@"avatarWidth"];
+    int avatarHeight = (int) newsDict[@"avatarHeight"];
     NSNumber *date = newsDict[@"date"];
     NSString *description = newsDict[@"description"];
     NSString *publisherIcon = newsDict[@"publisherIcon"];
@@ -91,6 +93,8 @@
     news.publisher = publisher;
     news.publisherIcon = publisherIcon;
     news.avatarURL = avatarURL;
+    news.avatarWidth = avatarWidth;
+    news.avatarHeight = avatarHeight;
     news.totalComments = totalComments;
     news.date = date;
     news.cellHeight = [[NSDictionary alloc] init];

@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(UIFont *)fontMedium:(CGFloat)size;
 -(UIFont *)fontNormal:(CGFloat)size;
 -(float) heightForOneLine: (UIFont *) font;
-
++(int) getConstant;
 @end
 
 NS_ASSUME_NONNULL_END

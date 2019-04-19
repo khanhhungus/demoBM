@@ -20,6 +20,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *publisher;
 @property (strong, nonatomic) NSString *publisherIcon;
 @property (strong, nonatomic) NSString *avatarURL;
+
+@property int avatarWidth;
+@property int avatarHeight;
+
 @property (strong, nonatomic) NSString *totalComments;
 @property (strong, nonatomic) NSNumber *date;
 @property (strong, nonatomic) NSMutableArray<Image *> *images;

@@ -38,5 +38,7 @@
     return [formatString heightForString:@"1 dong " font:font maxWidth:self.maxWidth];
 }
 
-
++(int)getConstant {
+    return 100;
+}
 @end

@@ -55,6 +55,10 @@
     for(Image *image in news.images) {
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(x, 0, constant.maxWidth, heightScrollView)];
         [imageView sd_setImageWithURL:[NSURL URLWithString:image.url] placeholderImage:[UIImage imageNamed:@"grayBackground.png"]];
+        imageView.layer.cornerRadius = 5;
+        imageView.clipsToBounds = true;
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
+
         [_scrollView addSubview:imageView];
         x = imageView.frame.origin.x + constant.maxWidth;
     }

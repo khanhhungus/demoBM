@@ -41,8 +41,6 @@
     self.totalCmtLabel.text = totalCmt;
     float widthCmtLb = [formatString widthForString: totalCmt font: [constant fontNormal:14.0f]];
     float xTotalCmt = constant.maxWidth - widthCmtLb;
-    [self.totalCmtLabel setFrame: CGRectMake(xTotalCmt, 0, constant.maxWidth, self.totalCmtLabel.frame.size.height)];
-
-
+    [self.totalCmtLabel setFrame: CGRectMake(xTotalCmt, 0, widthCmtLb, self.totalCmtLabel.frame.size.height)];
 }
 @end
