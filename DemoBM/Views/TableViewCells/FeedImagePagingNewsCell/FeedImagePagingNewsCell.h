@@ -1,8 +1,8 @@
 //
-//  FeedNewsCell.h
+//  FeedImagePagingNewsCell.h
 //  DemoBM
 //
-//  Created by CPU11738 on 4/17/19.
+//  Created by CPU11738 on 4/19/19.
 //  Copyright © 2019 Khanh Hung Nguyen. All rights reserved.
 //
 
@@ -14,12 +14,13 @@
 #import "FooterNewsView.h"
 #import "PhotoFourView.h"
 #import "News.h"
+#import "PhotoPageView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FeedSingleImageNewsCell : UITableViewCell
-
+@interface FeedImagePagingNewsCell : UITableViewCell
 -(void) fillData:(News *)news;
+
 @end
 
 NS_ASSUME_NONNULL_END

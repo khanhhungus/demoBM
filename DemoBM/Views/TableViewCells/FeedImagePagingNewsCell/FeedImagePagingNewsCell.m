@@ -1,21 +1,20 @@
 //
-//  FeedNewsCell.m
+//  FeedImagePagingNewsCell.m
 //  DemoBM
 //
-//  Created by CPU11738 on 4/17/19.
+//  Created by CPU11738 on 4/19/19.
 //  Copyright © 2019 Khanh Hung Nguyen. All rights reserved.
 //
 
-#import "FeedSingleImageNewsCell.h"
+#import "FeedImagePagingNewsCell.h"
 
-@implementation FeedSingleImageNewsCell {
+@implementation FeedImagePagingNewsCell {
     HeaderPublisherView *headerView;
     TitleDescriptionView *titleView;
-    PhotoSingleView *photoSingleView;
-    PhotoFourView *photoFourView;
     FooterNewsView *footerView;
     Constant *constant;
     FormatString *formatString;
+    PhotoPageView *photoPageView;
 }
 
 - (void)awakeFromNib {
@@ -38,14 +37,14 @@
         titleView = [[NSBundle.mainBundle loadNibNamed:@"TitleDescriptionView" owner:self options:nil] objectAtIndex:0] ;
         [titleView setFrame:CGRectMake(constant.margin, 40, constant.maxWidth, 50)];
         [self addSubview: titleView];
-
+        
         footerView = [[NSBundle.mainBundle loadNibNamed:@"FooterNewsView" owner:self options:nil] objectAtIndex:0];
         [self addSubview:footerView];
-
-        photoSingleView = [[NSBundle.mainBundle loadNibNamed:@"PhotoSingleView" owner:self options:nil] objectAtIndex:0];
-        [self addSubview: photoSingleView];
         
-
+        photoPageView = [[NSBundle.mainBundle loadNibNamed:@"PhotoPageView" owner:self options:nil] objectAtIndex:0];
+        [self addSubview: photoPageView];
+        
+        
     }
     return self;
 }
@@ -63,17 +62,17 @@
     [titleView setFrame:CGRectMake(constant.margin, 45, constant.maxWidth, heightForTitleDescView)];
     
     float yPhotoView = heightForTitleDescView + 45 + constant.spacing;
-    float yFooterView = yPhotoView + constant.spacing + constant.maxWidth*0.6;
+    float yFooterView = yPhotoView + constant.spacing + photoPageView.heightView;
     
-    [photoSingleView setFrame:CGRectMake(constant.margin, yPhotoView,constant.maxWidth, constant.maxWidth*0.6)];
-    [photoSingleView fillData:news];
+    [photoPageView setFrame:CGRectMake(constant.margin, yPhotoView,constant.maxWidth, photoPageView.heightView)];
+    [photoPageView fillData:news];
     
-
     float heightOneLine = [constant heightForOneLine:[constant fontNormal:14]];
     [footerView setFrame:CGRectMake(constant.margin, yFooterView, constant.maxWidth, heightOneLine)];
     [headerView fillData:news];
     [titleView fillData:news];
     [footerView fillData:news];
 }
+
 
 @end
